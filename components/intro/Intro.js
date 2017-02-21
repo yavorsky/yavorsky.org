@@ -34,8 +34,7 @@ export default () =>
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        font-family: serif;
-        font-weight: 700;
+        font-family: BlinkMacSystemFont;
       }
 
       .Intro .Intro-Info .Intro-Info-Avatar {
@@ -47,10 +46,15 @@ export default () =>
         border-radius: 50%;
       }
 
+      .Intro .Intro-Info h1 {
+        font-weight: 500;
+      }
+
       .Intro .Intro-Info h4 {
-        font-family: Oswald;
+        font-family: BlinkMacSystemFont;
         margin-top: 0;
         margin-top: 0px;
+        font-weight: 200;
       }
 
       .Intro-Info-Contact {
@@ -70,7 +74,7 @@ export default () =>
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        font-family: Oswald;
+        font-family: BlinkMacSystemFont;
         font-size: 9px;
         font-weight: 200;
         width: 70px;
