@@ -1,11 +1,11 @@
 import Head from '../components/base/Head';
-import Intro from '../components/intro/Intro';
+import Post from '../components/blog/Post';
 
-export default () => (
+export default (props) => (
   <div className="App">
-    <Head />
-    <Intro />
-
+    <Head title={props.title}/>
+    <Post id={props.id}/>
+    
     <style jsx>{`
       .App {
         display: flex;

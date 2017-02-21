@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Canvas } from '../Canvas.js';
+import { Canvas } from '../../base/Canvas.js';
 import { getDrawBorderSequence } from './actions';
 import { repeatAction } from '../helpers';
 

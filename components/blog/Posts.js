@@ -1,13 +1,13 @@
-import Head from '../components/base/Head';
-import Intro from '../components/intro/Intro';
+import ListPost from './ListPost';
+import posts from '../../posts';
 
 export default () => (
-  <div className="App">
-    <Head />
-    <Intro />
-
+  <div className="Posts-list">
+    {posts.map(post =>
+      <ListPost data={post}/>
+    )}
     <style jsx>{`
-      .App {
+      .Posts-list {
         display: flex;
         position: fixed;
         right: 0;
@@ -19,4 +19,4 @@ export default () => (
       }
     `}</style>
   </div>
-)
+);

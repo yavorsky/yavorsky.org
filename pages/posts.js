@@ -1,13 +1,15 @@
 import Head from '../components/base/Head';
-import Intro from '../components/intro/Intro';
+import Posts from '../components/blog/Posts';
+
+const bg = '/static/bg.jpg';
 
 export default () => (
   <div className="App">
-    <Head />
-    <Intro />
-
+    <Head title="Yavorsky - Blog" />
+    <Blog />
+    
     <style jsx>{`
-      .App {
+      .Posts {
         display: flex;
         position: fixed;
         right: 0;

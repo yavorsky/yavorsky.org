@@ -14,7 +14,7 @@ var _head2 = _interopRequireDefault(_head);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _jsxFileName = '/Users/aqson/Development/yavorsky/ya2/components/Head.js';
+var _jsxFileName = '/Users/aqson/Development/yavorsky/ya2/components/base/Head.js';
 
 
 var defaultTitle = 'Artem Yavorsky - Frontend, Backend Development';
@@ -96,5 +96,9 @@ exports.default = function (_ref) {
       fileName: _jsxFileName,
       lineNumber: 23
     }
-  }));
+  }), _react2.default.createElement('style', { global: true, __source: {
+      fileName: _jsxFileName,
+      lineNumber: 25
+    }
+  }, '\n      html, body {\n        margin: 0;\n      }\n      \n      body a {\n        text-decoration: none;\n        color: #CCC;\n        font-family: BlinkMacSystemFont, monospace;\n      }\n\n      body a:hover {\n        color: #333;\n      }\n\n      body ul {\n        list-style: none;\n        margin: 0;\n      }\n\n      .Menu > a {\n        text-transform: uppercase;\n        font-weight: 400;\n      }\n    '));
 };

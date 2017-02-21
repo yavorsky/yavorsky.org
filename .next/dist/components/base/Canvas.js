@@ -35,7 +35,7 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _jsxFileName = '/Users/aqson/Development/yavorsky/ya2/components/canvas/Canvas.js';
+var _jsxFileName = '/Users/aqson/Development/yavorsky/ya2/components/base/Canvas.js';
 
 
 var cache = {};

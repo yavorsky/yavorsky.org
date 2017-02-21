@@ -21,5 +21,31 @@ export default ({ title = defaultTitle }) => (
     <meta name="twitter:title" content="Artem Yavorsky - Freelance Web Consultant and Developer"/>
     <meta name="twitter:description" content="Artem Yavorsky - Freelance Web Consultant and Developer. Available for hire."/>
     <meta name="twitter:image" content="https://avatars2.githubusercontent.com/u/1521229?v=3&s=460" />
+
+    <style global>{`
+      html, body {
+        margin: 0;
+      }
+      
+      body a {
+        text-decoration: none;
+        color: #CCC;
+        font-family: BlinkMacSystemFont, monospace;
+      }
+
+      body a:hover {
+        color: #333;
+      }
+
+      body ul {
+        list-style: none;
+        margin: 0;
+      }
+
+      .Menu > a {
+        text-transform: uppercase;
+        font-weight: 400;
+      }
+    `}</style>
   </Head>
 );
