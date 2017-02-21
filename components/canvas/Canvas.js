@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const cache = {};
+let cache = {};
 
 const getFromCoords = (id) => {
   const lastCoords = cache[id];
@@ -102,6 +102,7 @@ export class Canvas extends Component {
     }
   }
   clear() {
+    cache = {};
     const { width, height } = this.props;
     this.ctx.clearRect(0, 0, width, height);
   }

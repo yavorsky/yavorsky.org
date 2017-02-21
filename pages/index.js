@@ -1,12 +1,13 @@
+import Head from '../components/Head';
 import Intro from '../components/intro/Intro';
 
 const bg = '/static/bg.jpg';
 
 export default () => (
   <div className="App">
+    <Head />
     <Intro />
-    <div />
-    <div />
+    
     <style jsx>{`
       .App {
         display: flex;

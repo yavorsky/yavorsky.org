@@ -189,6 +189,7 @@ var Canvas = exports.Canvas = function (_Component) {
   }, {
     key: 'clear',
     value: function clear() {
+      cache = {};
       var _props4 = this.props,
           width = _props4.width,
           height = _props4.height;
@@ -236,7 +237,7 @@ var Canvas = exports.Canvas = function (_Component) {
         ref: 'canvas',
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 131
+          lineNumber: 132
         }
       });
     }

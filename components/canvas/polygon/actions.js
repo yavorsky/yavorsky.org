@@ -1,8 +1,10 @@
-import { randomBetween } from '../../utils';
+import { randomBetween } from '../../../lib/utils';
 
 export const getDrawBorderSequence = (ctx, {width, height}) => {
   if (!width) return [];
   let y = height / 2;
+  const heightRangeMax = height / 2;
+  const heightRange = [y - heightRangeMax, y + heightRangeMax];
   const initialAction = {
     coords: {
       width: 1,
@@ -14,14 +16,19 @@ export const getDrawBorderSequence = (ctx, {width, height}) => {
     type: 'line'
   };
   const sequence = [initialAction];
-  const heightRange = [y-300, y+300];
   const widthRange = [40, 80];
   let x = 0;
   while (x < width) {
     y = randomBetween(...heightRange);
     const nextX = x + randomBetween(...widthRange);
-    x = nextX > width ? width : nextX;
-    // x += 20
+    
+    if (nextX > width) {
+      x = width;
+      y = height / 2;
+    } else {
+      x = nextX;
+    }
+
     const coords = {
       ...initialAction.coords, x, y
     }

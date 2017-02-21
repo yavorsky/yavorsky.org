@@ -59,7 +59,7 @@ export default class extends Component {
 
   render() {
     const actions = [
-      ...repeatAction(getDrawBorderSequence, 5)
+      ...repeatAction(getDrawBorderSequence, 1)
     ];
     const { width, height, redraw } = this.state;
 
