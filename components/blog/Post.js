@@ -6,8 +6,7 @@ const formatDate = (str) => {
 }
 
 export default ({ id }) => {
-  const input = require(`../../posts/${id}`);
-  console.log(input);
+  const input = require(`../../data/${id}`);
 
   return <div className="Post">
   </div>

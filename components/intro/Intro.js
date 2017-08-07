@@ -64,8 +64,16 @@ export default () =>
       .Intro-Info-Contact {
         margin-top: 10px;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         width: 100%;
+      }
+
+      .Intro-Info-Contact span {
+        opacity: 0;
+      }
+      
+      .Intro-Info-Contact a:hover span {
+        opacity: 1;
       }
 
       .Intro-Info-Contact a {
@@ -74,12 +82,11 @@ export default () =>
         margin: 0;
         padding: 0;
         color: #333;
-        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         font-family: BlinkMacSystemFont, monospace;
-        font-size: 9px;
+        font-size: 12px;
         font-weight: 200;
         width: 70px;
       }

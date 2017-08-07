@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 
 let cache = {};
 
-const getFromCoords = (id) => {
+const getFromCoords = id => {
   const lastCoords = cache[id];
   if (lastCoords) {
     return {
       x: lastCoords.x,
       y: lastCoords.y
-    }
+    };
   }
   return null;
-}
+};
 
-const processAction = (ctx, {type, color, width, height, id, coords: {x, y}}) => {
+const processAction = (ctx, { type, color, width, height, id, coords: { x, y } }) => {
   const fromCoords = getFromCoords(id);
   switch (type) {
     case 'line':
@@ -34,8 +34,8 @@ export class Canvas extends Component {
     this.ctx = this.refs.canvas.getContext("2d", {alpha: true});
     const { width, height, redraw, actions } = this.props;
     const opts = {
-      width: width,
-      height: height,
+      width,
+      height,
       action: {
         type: 'init'
       }
@@ -70,13 +70,13 @@ export class Canvas extends Component {
   runActions() {
     const { actions, width, height } = this.props;
     const opts = {
-      width: width,
-      height: height,
+      width,
+      height,
       action: {
         type: 'update',
         targ: 'resize'
       }
-    }
+    };
     this.drawActions(actions, opts);
   }
   drawActions(actions, opts) {
@@ -84,9 +84,9 @@ export class Canvas extends Component {
     actions.forEach(getSequence => {
       const sequence = getSequence(this.ctx, opts);
       this.ctx.beginPath();
-      sequence.forEach((opts) => {
+      sequence.forEach(sequenceOpts => {
         // console.log(coords)
-        processAction(this.ctx, opts);
+        processAction(this.ctx, sequenceOpts);
       });
       this.ctx.stroke();
       this.ctx.closePath();
@@ -115,7 +115,7 @@ export class Canvas extends Component {
       this.ctx.backingStorePixelRatio || 1;
   }
   getRatio() {
-    const devicePixelRatio = typeof window != 'undefined' ? window.devicePixelRatio : 1;
+    const devicePixelRatio = typeof window !== 'undefined' ? window.devicePixelRatio : 1;
 
     return devicePixelRatio / this.getBackingRatio();
   }
@@ -137,7 +137,7 @@ export class Canvas extends Component {
         width, height
       }}
       onClick={this.handleClick}
-      ref="canvas" 
+      ref="canvas"
     />;
   }
 }

@@ -1,17 +1,17 @@
 import Head from '../components/base/Head';
-import Posts from '../components/blog/Posts';
 
-const bg = '/static/bg.jpg';
+export default ({ children, title }) => (
+  <div className="Page">
+    <Head title={title}/>
+    {children}
 
-export default () => (
-  <div className="App">
-    <Head title="Yavorsky - Blog" />
-    <Blog />
-    
     <style jsx>{`
-      .Posts {
+      .Page {
         display: flex;
         position: fixed;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
         right: 0;
         left: 0;
         top: 0;

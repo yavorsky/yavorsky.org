@@ -26,10 +26,10 @@ export default ({ title = defaultTitle }) => (
       html, body {
         margin: 0;
       }
-      
+
       body a {
         text-decoration: none;
-        color: #CCC;
+        color: #CCCCCC;
         font-family: BlinkMacSystemFont, monospace;
       }
 

@@ -1,22 +1,27 @@
-import Head from '../components/base/Head';
-import Post from '../components/blog/Post';
+import React from 'react';
+// import dynamic from 'next/dynamic'
+import Page from '../layouts/Page';
+import Posts from '../components/blog/Posts';
+import { elements } from '../posts';
 
-export default (props) => (
-  <div className="App">
-    <Head title={props.title}/>
-    <Post id={props.id}/>
-    
+
+export default (props) => {
+  const { url } = props;
+ 
+  const Post = elements[url.query.name];
+  // const data = dynamic(`../posts/jsx/${query}.js`);
+  return <Page className='Post'>
+    <div><Post /></div>
     <style jsx>{`
-      .App {
+      .Posts {
+        padding: 20px;
+        flex: 1 1 auto;
+        position: relative;
         display: flex;
-        position: fixed;
-        right: 0;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        background: #FFF;
-        background-size: cover;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
       }
     `}</style>
-  </div>
-)
+  </Page>;
+}

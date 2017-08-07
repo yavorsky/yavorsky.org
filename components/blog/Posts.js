@@ -3,9 +3,9 @@ import posts from '../../posts';
 
 export default () => (
   <div className="Posts-list">
-    {posts.map(post =>
-      <ListPost data={post}/>
-    )}
+    {posts.map(post => {
+      return <ListPost key={post.id} data={post}/>;
+    })}
     <style jsx>{`
       .Posts-list {
         display: flex;

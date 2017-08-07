@@ -100,5 +100,5 @@ exports.default = function (_ref) {
       fileName: _jsxFileName,
       lineNumber: 25
     }
-  }, '\n      html, body {\n        margin: 0;\n      }\n      \n      body a {\n        text-decoration: none;\n        color: #CCC;\n        font-family: BlinkMacSystemFont, monospace;\n      }\n\n      body a:hover {\n        color: #333;\n      }\n\n      body ul {\n        list-style: none;\n        margin: 0;\n      }\n\n      .Menu > a {\n        text-transform: uppercase;\n        font-weight: 400;\n      }\n    '));
+  }, '\n      html, body {\n        margin: 0;\n      }\n\n      body a {\n        text-decoration: none;\n        color: #CCCCCC;\n        font-family: BlinkMacSystemFont, monospace;\n      }\n\n      body a:hover {\n        color: #333;\n      }\n\n      body ul {\n        list-style: none;\n        margin: 0;\n      }\n\n      .Menu > a {\n        text-transform: uppercase;\n        font-weight: 400;\n      }\n    '));
 };

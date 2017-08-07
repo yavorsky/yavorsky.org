@@ -8,9 +8,10 @@ const formatDate = (str) => {
   return format(date, 'DD MMM YYYY');
 }
 
-export default ({ date, title, id, keywords }) => (
-  <li className="Post">
-    <Link title={keywords.join(' ')} href={`posts/${id}`}>{title}</Link>
+export default (props) => {
+  const { date, title, id, keywords } = props.data;
+  return <li className="Post">
+    <Link title={keywords.join(' ')} href={{pathname: 'post', query: { name: id } }}>{title}</Link>
     <i>{formatDate(date)}</i>
     <style jsx>{`
       a {
@@ -22,4 +23,4 @@ export default ({ date, title, id, keywords }) => (
       }
       `}</style>
   </li>
-);
+}
