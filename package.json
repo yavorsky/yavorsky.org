@@ -1,7 +1,6 @@
 {
   "name": "ya2",
   "dependencies": {
-    "particles.js": "2.0.0",
     "date-fns": "1.27.2",
     "next": "^2.4.9",
     "react": "^15.6.1",
@@ -21,9 +20,9 @@
   },
   "browserslist": "chrome 55",
   "scripts": {
-    "dev": "./node_modules/.bin/next",
-    "build": "./node_modules/.bin/next build",
-    "prestart": "./node_modules/.bin/next build",
-    "start": "./node_modules/.bin/next start -p ${PORT}"
+    "dev": "next",
+    "build": "next build",
+    "prestart": "next build",
+    "start": "next start -p ${PORT}"
   }
 }
