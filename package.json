@@ -1,4 +1,5 @@
 {
+  "name": "ya2",
   "dependencies": {
     "particles.js": "2.0.0",
     "date-fns": "1.27.2",
