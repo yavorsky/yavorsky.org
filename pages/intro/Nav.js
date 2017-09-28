@@ -1,9 +1,9 @@
 import Link from 'next/link';
 const WrapperClass = 'Intro-Nav';
 
+// <Link className="Intro-Nav Menu-Link" href="posts">Blog</Link>
 export default () =>
   <div className={WrapperClass}>
-    <Link className="Intro-Nav Menu-Link" href="posts">Blog</Link>
 
     <style jsx>{`
       .${WrapperClass} {

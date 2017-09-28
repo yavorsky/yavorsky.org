@@ -18,14 +18,17 @@ const ContactLink = ({ href, children, logo }) =>
         justify-content: space-between;
         align-items: center;
         font-family: BlinkMacSystemFont, monospace;
-        font-size: 9px;
+        font-size: 12px;
         font-weight: 200;
         width: 70px;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        tap-highlight-color: rgba(0, 0, 0, 0);
       }
 
       .Link span {
-        font-size: 13px;
+        font-size: 14px;
         opacity: 0;
+        font-weight: 300;
       }
 
       .Link:hover span {
@@ -38,6 +41,19 @@ const ContactLink = ({ href, children, logo }) =>
 
       .Link:before {
         margin-left: 0;
+        font-size: 24px;
+      }
+
+      @media (max-width: 480px) {
+        .Link {
+          padding: 15px 0;
+        }
+
+        .Link span {
+          margin-top: 5px;
+          opacity: 1;
+          font-size: 16px;
+        }
       }
     `}
     </style>
@@ -61,6 +77,14 @@ const ContactLinks = () => (
         display: flex;
         justify-content: space-around;
         width: 100%;
+      }
+
+      @media (max-width: 480px) {
+        .Intro-Info-Contact {
+          margin-top: 20px;
+          flex-direction: column;
+          align-items: center;
+        }
       }
 
     `}</style>
