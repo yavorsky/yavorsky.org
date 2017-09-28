@@ -21,9 +21,9 @@
   },
   "browserslist": "chrome 55",
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "prestart": "next build",
-    "start": "next start -p ${PORT}"
+    "dev": "./node_modules/.bin/next",
+    "build": "./node_modules/.bin/next build",
+    "prestart": "./node_modules/.bin/next build",
+    "start": "./node_modules/.bin/next start -p ${PORT}"
   }
 }
