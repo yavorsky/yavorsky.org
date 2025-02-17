@@ -1,5 +1,5 @@
 import { BlogPosts } from '@/app/components/posts'
-import { ArrowUpIcon, GithubIcon, RssIcon, TwitterIcon, XIcon } from 'lucide-react'
+import { GithubIcon, XIcon } from 'lucide-react'
 
 export default function Page() {
   return (

@@ -85,7 +85,7 @@ const CV = () => {
                 <span className="text-zinc-400">Netflix</span>
               </div>
               <ul className="text-zinc-300 space-y-2">
-                <li>• Delivered "Delivery List" project as Informed Captain, creating reusable component system</li>
+                <li>• Delivered &quot;Delivery List&quot; project as Informed Captain, creating reusable component system</li>
                 <li>• Architected shared platform for Games and Movies productions, achieving 60% code reuse</li>
                 <li>• Reduced initial loading time by 30% through SSR optimization and component improvements</li>
                 <li>• Initiated UniTestkits approach, reducing test boilerplate by 20% LOC per suite</li>
@@ -138,11 +138,11 @@ const CV = () => {
             <div>
               <h4 className="text-lg font-medium mb-2">Conference Talks</h4>
               <ul className="text-zinc-300 space-y-2">
-                <li>• "AI for Developers: Assistant or Potential Threat?"</li>
-                <li>• "99 Ways to Take Away Your Polyfills"</li>
-                <li>• "How We Created Browser Inside Browser"</li>
-                <li>• "Compile Like It's 2017"</li>
-                <li>• "@babel/core 7"</li>
+                <li>• AI for Developers: Assistant or Potential Threat?</li>
+                <li>• 99 Ways to Take Away Your Polyfills</li>
+                <li>• How We Created Browser Inside Browser</li>
+                <li>• Compile Like It&apos;s 2017</li>
+                <li>• @babel/core 7</li>
               </ul>
             </div>
           </div>

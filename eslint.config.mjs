@@ -1,4 +1,7 @@
 import eslint from '@eslint/js';
+import nextPlugin from '@next/eslint-plugin-next';
+import reactPlugin from 'eslint-plugin-react';
+import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsparser from '@typescript-eslint/parser';
 import prettierConfig from 'eslint-config-prettier';
@@ -10,7 +13,21 @@ export const baseConfig = [
   eslint.configs.recommended,
   {
     files: ['**/*.ts', '**/*.tsx'],
+    languageOptions: {
+      parser: tsparser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+      },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        FormData: 'readonly',
+      }
+    },
     plugins: {
+      '@typescript-eslint': tseslint,
+      'prettier': prettierPlugin,
       '@next/next': nextPlugin,
       'react': reactPlugin,
       'react-hooks': reactHooksPlugin,
@@ -25,6 +42,7 @@ export const baseConfig = [
       ...reactHooksPlugin.configs.recommended.rules,
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
+      ...prettierConfig.rules,  // Disable rules that conflict with prettier
     },
   },
   {

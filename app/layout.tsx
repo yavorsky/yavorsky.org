@@ -8,6 +8,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import Footer from './components/footer'
 import { baseUrl } from './sitemap'
 import cx from 'classnames'
+import { ReactNode } from 'react';
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: ReactNode
 }) {
   return (
     <html
