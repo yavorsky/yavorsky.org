@@ -7,5 +7,5 @@ export default function Footer({ className }: { className?: string }) {
         © {new Date().getFullYear()} MIT Licensed
       </p>
     </footer>
-  )
+  );
 }

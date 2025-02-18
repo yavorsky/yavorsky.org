@@ -1,18 +1,22 @@
-import { notFound } from 'next/navigation'
-import { CustomMDX } from '@/app/components/mdx'
-import { formatDate, getBlogPosts } from '@/app/blog/utils'
-import { baseUrl } from '@/app/sitemap'
+import { notFound } from 'next/navigation';
+import { CustomMDX } from '@/app/components/mdx';
+import { formatDate, getBlogPosts } from '@/app/blog/utils';
+import { baseUrl } from '@/app/sitemap';
+import { PageProps } from '@/app/types';
 
 export async function generateStaticParams() {
-  const posts = getBlogPosts()
+  const posts = await getBlogPosts();
 
   return posts.map((post) => ({
     slug: post.slug,
-  }))
+  }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const post = getBlogPosts().find((post) => post.slug === params.slug);
+export async function generateMetadata({
+  params,
+}: PageProps<{ slug: string }>) {
+  const [readyParams, posts] = await Promise.all([params, getBlogPosts()]);
+  const post = posts.find((post) => post.slug === readyParams.slug);
   if (!post) {
     return;
   }
@@ -22,10 +26,10 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
     publishedAt: publishedTime,
     summary: description,
     image,
-  } = post.metadata
+  } = post.metadata;
   const ogImage = image
     ? image
-    : `${baseUrl}/og?title=${encodeURIComponent(title)}`
+    : `${baseUrl}/og?title=${encodeURIComponent(title)}`;
 
   return {
     title,
@@ -48,14 +52,15 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
       description,
       images: [ogImage],
     },
-  }
+  };
 }
 
-export default function Blog({ params }: { params: { slug: string } }) {
-  const post = getBlogPosts().find((post) => post.slug === params.slug)
+export default async function Blog({ params }: PageProps<{ slug: string }>) {
+  const [readyParams, posts] = await Promise.all([params, getBlogPosts()]);
+  const post = posts.find((post) => post.slug === readyParams.slug);
 
   if (!post) {
-    notFound()
+    notFound();
   }
 
   return (
@@ -94,5 +99,5 @@ export default function Blog({ params }: { params: { slug: string } }) {
         <CustomMDX source={post.content} />
       </article>
     </section>
-  )
+  );
 }

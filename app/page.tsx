@@ -1,55 +1,34 @@
-import { BlogPosts } from '@/app/components/posts'
-import { GithubIcon, XIcon } from 'lucide-react'
+import { BlogPosts } from '@/app/components/posts';
+import { SocialLinks } from './components/social-links';
 
 export default function Page() {
   return (
-    <section className='max-w-xl'>
+    <section className="max-w-2xl">
       <h1 className=" mb-4 text-2xl font-semibold tracking-tighter">
-        Artem Yavorskyi
+        Art Yavorsky
       </h1>
-      <h3 className="mb-4 text-foreground/70">
-        Senior software engineer / Engineering manager
+      <h3 className="mb-4 text-foreground/70 text-lg">
+        Software Engineer & Engineering Manager
       </h3>
-      <p>Now unbuilt.app. Sometimes Babel.js. Before - Netflix, Wix, Float.</p>
-      <p>Open to Hire.</p>
-      <div className="my-8">
+
+      <p>
+        I create developer tools that make the impossible feel routine and
+        routine feel fun.
+      </p>
+      <p className="mt-4">
+        When I&apos;m not leading engineering teams at companies like Wix
+        (2018-2023) and Netflix (2023-2025), I&apos;m building the fastest and
+        open-source web stack detection tool - unbuilt.app, or contributing to
+        Babel.js
+      </p>
+      <div className="mt-8">
+        <h3 className="mb-4 text-foreground/70 text-lg">Read</h3>
         <BlogPosts />
       </div>
-      <ul className="font-sm mt-8 flex flex-col space-x-0 space-y-2 text-neutral-600 md:flex-row md:space-x-4 md:space-y-0 dark:text-neutral-300">
-        {/* <li>
-          <a
-            className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
-            rel="noopener noreferrer"
-            target="_blank"
-            href="/rss"
-          >
-            <RssIcon size={14} />
-            <p className="ml-2 h-7">rss</p>
-          </a>
-        </li> */}
-        <li>
-          <a
-            className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
-            rel="noopener noreferrer"
-            target="_blank"
-            href="https://github.com/yavorsky"
-          >
-            <GithubIcon size={14} />
-            <p className="ml-2 h-7">github.com/yavorsky</p>
-          </a>
-        </li>
-        <li>
-          <a
-            className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
-            rel="noopener noreferrer"
-            target="_blank"
-            href="https://x.com/yavorsky_"
-          >
-            <XIcon size={14} />
-            <p className="ml-2 h-7">x.com/yavorsky_</p>
-          </a>
-        </li>
-      </ul>
+      <div className="mt-8">
+        <h3 className="mb-4 text-foreground/70 text-lg">Follow</h3>
+        <SocialLinks />
+      </div>
     </section>
-  )
+  );
 }

@@ -38,17 +38,19 @@ export const baseConfig = [
       },
     },
     rules: {
+      ...tseslint.configs.recommended.rules,
       ...reactPlugin.configs.recommended.rules,
       ...reactHooksPlugin.configs.recommended.rules,
+      ...nextPlugin.configs.recommended.rules,
+      ...prettierConfig.rules,
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
-      ...prettierConfig.rules,  // Disable rules that conflict with prettier
+      'prettier/prettier': 'error',
     },
   },
   {
-    ignores: ['tailwind.config.js', 'postcss.config.js', '.next', 'node_modules'],
+    ignores: ['tailwind.config.ts', 'postcss.config.js', '.next', 'node_modules'],
   },
 ];
 
-// Default export for root config
 export default baseConfig;

@@ -1,12 +1,12 @@
-import fs from 'fs'
-import path from 'path'
+import fs from 'fs/promises';
+import path from 'path';
 
 type Metadata = {
-  title: string
-  publishedAt: string
-  summary: string
-  image?: string
-}
+  title: string;
+  publishedAt: string;
+  summary: string;
+  image?: string;
+};
 
 function parseFrontmatter(fileContent: string) {
   const frontmatterRegex = /---\s*([\s\S]*?)\s*---/;
@@ -18,72 +18,80 @@ function parseFrontmatter(fileContent: string) {
 
   frontMatterLines.forEach((line) => {
     const [key, ...valueArr] = line.split(': ');
-    const value = valueArr.join(': ').trim().replace(/^['"](.*)['"]$/, '$1');
+    const value = valueArr
+      .join(': ')
+      .trim()
+      .replace(/^['"](.*)['"]$/, '$1');
     metadata[key.trim() as keyof Metadata] = value;
-  })
+  });
 
   return { metadata: metadata as Metadata, content };
 }
 
-function getMDXFiles(dir: string) {
-  return fs.readdirSync(dir).filter((file) => path.extname(file) === '.mdx');
+async function getMDXFiles(dir: string) {
+  const dirContent = await fs.readdir(dir);
+  return dirContent.filter((file) => path.extname(file) === '.mdx');
 }
 
-function readMDXFile(filePath: string) {
-  const rawContent = fs.readFileSync(filePath, 'utf-8');
+async function readMDXFile(filePath: string) {
+  const rawContent = await fs.readFile(filePath, 'utf-8');
   return parseFrontmatter(rawContent);
 }
 
-function getMDXData(dir: string) {
-  const mdxFiles = getMDXFiles(dir)
-  return mdxFiles.map((file) => {
-    const { metadata, content } = readMDXFile(path.join(dir, file));
-    const slug = path.basename(file, path.extname(file));
+async function getMDXData(dir: string) {
+  const mdxFiles = await getMDXFiles(dir);
 
-    return {
-      metadata,
-      slug,
-      content,
-    }
-  })
+  const posts = Promise.all(
+    mdxFiles.map(async (file) => {
+      const { metadata, content } = await readMDXFile(path.join(dir, file));
+      const slug = path.basename(file, path.extname(file));
+
+      return {
+        metadata,
+        slug,
+        content,
+      };
+    })
+  );
+  return posts;
 }
 
 export function getBlogPosts() {
-  return getMDXData(path.join(process.cwd(), 'app', 'blog', 'posts'))
+  return getMDXData(path.join(process.cwd(), 'app', 'blog', 'posts'));
 }
 
 export function formatDate(date: string, includeRelative = false) {
-  const currentDate = new Date()
+  const currentDate = new Date();
   if (!date.includes('T')) {
-    date = `${date}T00:00:00`
+    date = `${date}T00:00:00`;
   }
-  const targetDate = new Date(date)
+  const targetDate = new Date(date);
 
-  const yearsAgo = currentDate.getFullYear() - targetDate.getFullYear()
-  const monthsAgo = currentDate.getMonth() - targetDate.getMonth()
-  const daysAgo = currentDate.getDate() - targetDate.getDate()
+  const yearsAgo = currentDate.getFullYear() - targetDate.getFullYear();
+  const monthsAgo = currentDate.getMonth() - targetDate.getMonth();
+  const daysAgo = currentDate.getDate() - targetDate.getDate();
 
-  let formattedDate = ''
+  let formattedDate = '';
 
   if (yearsAgo > 0) {
-    formattedDate = `${yearsAgo}y ago`
+    formattedDate = `${yearsAgo}y ago`;
   } else if (monthsAgo > 0) {
-    formattedDate = `${monthsAgo}mo ago`
+    formattedDate = `${monthsAgo}mo ago`;
   } else if (daysAgo > 0) {
-    formattedDate = `${daysAgo}d ago`
+    formattedDate = `${daysAgo}d ago`;
   } else {
-    formattedDate = 'Today'
+    formattedDate = 'Today';
   }
 
   const fullDate = targetDate.toLocaleString('en-us', {
     month: 'long',
     day: 'numeric',
     year: 'numeric',
-  })
+  });
 
   if (!includeRelative) {
-    return fullDate
+    return fullDate;
   }
 
-  return `${fullDate} (${formattedDate})`
+  return `${fullDate} (${formattedDate})`;
 }

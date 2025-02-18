@@ -1,8 +1,8 @@
 'use client';
 
-import { Button } from "@/components/ui/button"
-import { Download } from "lucide-react"
-import { useCallback } from "react";
+import { Button } from '@/components/ui/button';
+import { Download } from 'lucide-react';
+import { useCallback } from 'react';
 
 export const ExportPdfButton = () => {
   const handleDownloadPDF = useCallback(() => {
@@ -18,5 +18,5 @@ export const ExportPdfButton = () => {
       <Download className="w-4 h-4 mr-2" />
       Export PDF
     </Button>
-  )
-}
+  );
+};
