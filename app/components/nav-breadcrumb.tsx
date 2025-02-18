@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ChevronRight } from 'lucide-react';
+import { Slash } from 'lucide-react';
 import cx from 'classnames';
 import { usePathname } from 'next/navigation';
 
@@ -18,8 +18,7 @@ const NavBreadcrumb = ({ className }: BreadcrumbProps) => {
     .split('/')
     .filter(Boolean)
     .map((segment) => ({
-      label:
-        segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' '),
+      label: segment.replace(/-/g, ' '),
       path: segment,
     }));
 
@@ -39,13 +38,13 @@ const NavBreadcrumb = ({ className }: BreadcrumbProps) => {
 
       {segments.map((segment, index) => (
         <React.Fragment key={segment.path}>
-          <ChevronRight className="w-4 h-4" />
+          <Slash className="w-3 h-3 text-foreground/50" />
           <Link
             href={`/${segments
               .slice(0, index + 1)
               .map((s) => s.path)
               .join('/')}`}
-            className="hover:text-gray-900 transition-colors"
+            className="hover:underline"
           >
             {segment.label}
           </Link>

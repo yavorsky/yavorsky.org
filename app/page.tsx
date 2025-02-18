@@ -6,7 +6,7 @@ import Link from 'next/link';
 export default function Page() {
   return (
     <section className="max-w-2xl">
-      <h3 className="mt-2 text-foreground/70 text-lg">
+      <h3 className="mt-2 text-foreground/70 text-base">
         Software Engineer & Engineering Manager
       </h3>
 
@@ -18,9 +18,10 @@ export default function Page() {
         When I&apos;m not leading engineering teams at companies like{' '}
         <ExternalLink href="https://wix.com">Wix</ExternalLink> (2018-2023) and{' '}
         <ExternalLink href="https://netflix.com">Netflix</ExternalLink>{' '}
-        (2023-2025), I&apos;m working on unbuilt.app - the fastest and
-        open-source web stack detection tool, contributing to Babel.js and
-        sharing my knowledge at tech conferences and meetups.
+        (2023-2025), I&apos;m working on{' '}
+        <ExternalLink href="https://unbuilt.app">unbuilt.app</ExternalLink> -
+        the fastest and open-source web stack detection tool, contributing to
+        Babel.js and sharing my knowledge at tech conferences and meetups.
       </p>
       <p className="mt-4">
         Want to hire? Feel free to check out my{' '}

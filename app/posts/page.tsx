@@ -1,13 +1,13 @@
 import { BlogPosts } from '@/app/components/posts';
 
 export const metadata = {
-  title: 'Blog',
-  description: 'Personal blog.',
+  title: 'Posts',
+  description: 'All posts.',
 };
 
 export default function Page() {
   return (
-    <section>
+    <section className="max-w-2xl">
       <BlogPosts />
     </section>
   );

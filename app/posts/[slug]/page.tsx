@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { CustomMDX } from '@/app/components/mdx';
-import { formatDate, getBlogPosts } from '@/app/blog/utils';
+import { formatDate, getBlogPosts } from '@/app/posts/utils';
 import { baseUrl } from '@/app/sitemap';
 import { PageProps } from '@/app/types';
 
@@ -39,7 +39,7 @@ export async function generateMetadata({
       description,
       type: 'article',
       publishedTime,
-      url: `${baseUrl}/blog/${post.slug}`,
+      url: `${baseUrl}/posts/${post.slug}`,
       images: [
         {
           url: ogImage,
@@ -64,7 +64,7 @@ export default async function Blog({ params }: PageProps<{ slug: string }>) {
   }
 
   return (
-    <section className="pt-8">
+    <section className="pt-8 max-w-2xl">
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -79,7 +79,7 @@ export default async function Blog({ params }: PageProps<{ slug: string }>) {
             image: post.metadata.image
               ? `${baseUrl}${post.metadata.image}`
               : `/og?title=${encodeURIComponent(post.metadata.title)}`,
-            url: `${baseUrl}/blog/${post.slug}`,
+            url: `${baseUrl}/posts/${post.slug}`,
             author: {
               '@type': 'Person',
               name: 'My Portfolio',
