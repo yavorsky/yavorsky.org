@@ -6,11 +6,11 @@ import Link from 'next/link';
 export default function Page() {
   return (
     <section className="max-w-2xl">
-      <h3 className="mt-2 text-foreground/70 text-base">
+      <h3 className="mt-4 text-foreground/70 text-lg">
         Software Engineer & Engineering Manager
       </h3>
 
-      <p className="mt-8">
+      <p className="mt-4">
         I create developer tools that make the impossible feel routine and
         routine feel fun.
       </p>
@@ -20,8 +20,9 @@ export default function Page() {
         <ExternalLink href="https://netflix.com">Netflix</ExternalLink>{' '}
         (2023-2025), I&apos;m working on{' '}
         <ExternalLink href="https://unbuilt.app">unbuilt.app</ExternalLink> -
-        the fastest and open-source web stack detection tool, contributing to
-        Babel.js and sharing my knowledge at tech conferences and meetups.
+        the fastest and open-source web stack detection tool, contributing to{' '}
+        <ExternalLink href="https://babeljs.io">Babel.js</ExternalLink> and
+        sharing my knowledge at tech conferences and meetups.
       </p>
       <p className="mt-4">
         Want to hire? Feel free to check out my{' '}
