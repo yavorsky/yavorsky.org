@@ -64,7 +64,7 @@ export default async function Blog({ params }: PageProps<{ slug: string }>) {
   }
 
   return (
-    <section>
+    <section className="pt-8">
       <script
         type="application/ld+json"
         suppressHydrationWarning

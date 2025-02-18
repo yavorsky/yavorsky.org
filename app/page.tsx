@@ -1,32 +1,40 @@
 import { BlogPosts } from '@/app/components/posts';
 import { SocialLinks } from './components/social-links';
+import { ExternalLink } from './components/link';
+import Link from 'next/link';
 
 export default function Page() {
   return (
     <section className="max-w-2xl">
-      <h1 className=" mb-4 text-2xl font-semibold tracking-tighter">
-        Art Yavorsky
-      </h1>
-      <h3 className="mb-4 text-foreground/70 text-lg">
+      <h3 className="mt-2 text-foreground/70 text-lg">
         Software Engineer & Engineering Manager
       </h3>
 
-      <p>
+      <p className="mt-8">
         I create developer tools that make the impossible feel routine and
         routine feel fun.
       </p>
+      <p className="mt-2">
+        When I&apos;m not leading engineering teams at companies like{' '}
+        <ExternalLink href="https://wix.com">Wix</ExternalLink> (2018-2023) and{' '}
+        <ExternalLink href="https://netflix.com">Netflix</ExternalLink>{' '}
+        (2023-2025), I&apos;m working on unbuilt.app - the fastest and
+        open-source web stack detection tool, contributing to Babel.js and
+        sharing my knowledge at tech conferences and meetups.
+      </p>
       <p className="mt-4">
-        When I&apos;m not leading engineering teams at companies like Wix
-        (2018-2023) and Netflix (2023-2025), I&apos;m building the fastest and
-        open-source web stack detection tool - unbuilt.app, or contributing to
-        Babel.js
+        Want to hire? Feel free to check out my{' '}
+        <Link className="underline" href="/cv">
+          cv
+        </Link>{' '}
+        and to reach me via any of the links below.
       </p>
       <div className="mt-8">
         <h3 className="mb-4 text-foreground/70 text-lg">Read</h3>
         <BlogPosts />
       </div>
       <div className="mt-8">
-        <h3 className="mb-4 text-foreground/70 text-lg">Follow</h3>
+        <h3 className="mb-4 text-foreground/70 text-lg">Connect</h3>
         <SocialLinks />
       </div>
     </section>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExportPdfButton } from '../components/export-pdf-button';
+import { DownloadPdfButton } from '../components/download-pdf-button';
 
 const CV = () => {
   return (
@@ -11,7 +11,7 @@ const CV = () => {
             <h1 className="text-4xl font-light mb-4">Artem Yavorskyi</h1>
             <h2 className="text-xl text-zinc-400">Senior Software Engineer</h2>
           </div>
-          <ExportPdfButton />
+          <DownloadPdfButton />
         </div>
 
         {/* Contact */}

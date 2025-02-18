@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
 import { useCallback } from 'react';
 
-export const ExportPdfButton = () => {
+export const DownloadPdfButton = () => {
   const handleDownloadPDF = useCallback(() => {
     // In a real implementation, this would trigger PDF generation/download
     window.print();
@@ -16,7 +16,7 @@ export const ExportPdfButton = () => {
       className="bg-white text-black hover:bg-zinc-200"
     >
       <Download className="w-4 h-4 mr-2" />
-      Export PDF
+      Download PDF
     </Button>
   );
 };
