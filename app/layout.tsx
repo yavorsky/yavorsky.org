@@ -45,7 +45,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       className={cx('h-full', GeistSans.variable, GeistMono.variable)}
     >
       <body className="dark antialiased max-w-4xl lg:mx-auto h-full">
-        <main className="min-w-0 flex flex-col px-2 md:px-0 items-center h-full">
+        <main className="min-w-0 flex flex-col px-4 md:px-0 items-center h-full">
           <div className="flex-0">
             <NavBreadcrumb className="mt-10" />
             {children}
