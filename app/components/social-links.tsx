@@ -1,4 +1,9 @@
-import { GithubIcon, MailIcon } from 'lucide-react';
+import {
+  GithubIcon,
+  LinkedinIcon,
+  InstagramIcon,
+  MailIcon,
+} from 'lucide-react';
 import XIcon from './icons/x';
 
 export const SocialLinks = () => {
@@ -25,6 +30,30 @@ export const SocialLinks = () => {
         >
           <XIcon size={14} />
           <p className="ml-2 h-7 hidden md:inline-block">yavorsky_</p>
+        </a>
+      </div>
+      <span className="mr-4 text-foreground/30">|</span>
+      <div className="md:px-0 px-4">
+        <a
+          className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
+          rel="noopener noreferrer"
+          target="_blank"
+          href="https://linkedin.com/in/yvrsky"
+        >
+          <LinkedinIcon size={14} />
+          <p className="ml-2 h-7 hidden md:inline-block">yvrsky</p>
+        </a>
+      </div>
+      <span className="mr-4 text-foreground/30">|</span>
+      <div className="md:px-0 px-4">
+        <a
+          className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
+          rel="noopener noreferrer"
+          target="_blank"
+          href="https://instagram.com/aqson"
+        >
+          <InstagramIcon size={14} />
+          <p className="ml-2 h-7 hidden md:inline-block">aqson</p>
         </a>
       </div>
       <span className="mr-4 text-foreground/30">|</span>
