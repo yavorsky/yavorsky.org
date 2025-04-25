@@ -24,6 +24,12 @@ export default function Page() {
         <ExternalLink href="https://babeljs.io">Babel.js</ExternalLink> and
         sharing my knowledge at tech conferences and meetups.
       </p>
+      <p className="mt-2">
+        Currently at{' '}
+        <ExternalLink href="https://writer.com">Writer.com</ExternalLink>, I'm
+        helping to move forward an end-to-end AI platform that unites IT &
+        business teams.
+      </p>
       <p className="mt-4">
         Want to hire? Feel free to check out my{' '}
         <Link className="underline" href="/cv">
