@@ -93,6 +93,57 @@ const CV = () => {
         <div className="space-y-12">
           <div>
             <div className="flex justify-between items-baseline mb-2">
+              <h4 className="text-lg font-medium">AI Software Engineer</h4>
+              <span className="text-zinc-400">WRITER</span>
+            </div>
+            <ul className="text-zinc-300 space-y-2">
+              <li>
+                • Leading the development of Action Agent - Autonomous AI with
+                enterprise controls. Reasons, runs code, and executes tasks with
+                customer data and systems. Working on FE, BE and AI aspects of
+                the project.
+              </li>
+              <li>
+                • Co-maintainer of Writer Design System - Component Library
+                which is used by all internal teams and allow to build
+                consistent UI for all products.
+              </li>
+              <li>
+                • Reduced initial loading time by 30% through SSR optimization
+                and component improvements
+              </li>
+              <li>
+                • Initiated UniTestkits approach, reducing test boilerplate by
+                20% LOC per suite
+              </li>
+            </ul>
+          </div>
+          <div>
+            <div className="flex justify-between items-baseline mb-2">
+              <h4 className="text-lg font-medium">Software Engineer</h4>
+              <span className="text-zinc-400">Netflix</span>
+            </div>
+            <ul className="text-zinc-300 space-y-2">
+              <li>
+                • Delivered &quot;Delivery List&quot; project as Informed
+                Captain, creating reusable component system
+              </li>
+              <li>
+                • Architected shared platform for Games and Movies productions,
+                achieving 60% code reuse
+              </li>
+              <li>
+                • Reduced initial loading time by 30% through SSR optimization
+                and component improvements
+              </li>
+              <li>
+                • Initiated UniTestkits approach, reducing test boilerplate by
+                20% LOC per suite
+              </li>
+            </ul>
+          </div>
+          <div>
+            <div className="flex justify-between items-baseline mb-2">
               <h4 className="text-lg font-medium">Developer Experience Lead</h4>
               <span className="text-zinc-400">Wix.com</span>
             </div>
@@ -116,31 +167,6 @@ const CV = () => {
               <li>
                 • Established developer support system with 6-minute average
                 resolution time
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <div className="flex justify-between items-baseline mb-2">
-              <h4 className="text-lg font-medium">Software Engineer</h4>
-              <span className="text-zinc-400">Netflix</span>
-            </div>
-            <ul className="text-zinc-300 space-y-2">
-              <li>
-                • Delivered &quot;Delivery List&quot; project as Informed
-                Captain, creating reusable component system
-              </li>
-              <li>
-                • Architected shared platform for Games and Movies productions,
-                achieving 60% code reuse
-              </li>
-              <li>
-                • Reduced initial loading time by 30% through SSR optimization
-                and component improvements
-              </li>
-              <li>
-                • Initiated UniTestkits approach, reducing test boilerplate by
-                20% LOC per suite
               </li>
             </ul>
           </div>
@@ -175,6 +201,24 @@ const CV = () => {
           Open Source & Projects
         </h3>
         <div className="space-y-8">
+          <div>
+            <h4 className="text-lg font-medium mb-2">
+              unbuilt.app (Creator & Maintainer)
+            </h4>
+            <ul className="text-zinc-300 space-y-2">
+              <li>
+                • Developed web application analysis tool detecting frameworks,
+                bundlers, and libraries
+              </li>
+              <li>
+                • Built with Next.js (App Router), Server Actions, Playwright
+              </li>
+              <li>
+                • Implemented custom queue manager on DigitalOcean for efficient
+                resource utilization
+              </li>
+            </ul>
+          </div>
           <div>
             <h4 className="text-lg font-medium mb-2">
               unbuilt.app (Creator & Maintainer)
