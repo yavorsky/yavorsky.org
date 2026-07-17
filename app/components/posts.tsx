@@ -22,7 +22,7 @@ export async function BlogPosts() {
             href={`/posts/${post.slug}`}
           >
             <div className="w-full flex flex-col md:flex-row space-x-0 md:space-x-2">
-              <p className="text-neutral-600 dark:text-neutral-400 min-w-12 tabular-nums">
+              <p className="text-neutral-600 dark:text-neutral-400 md:w-20 shrink-0 tabular-nums whitespace-nowrap">
                 {formatDate(post.metadata.publishedAt, false, {
                   year: 'numeric',
                   month: 'short',

@@ -265,6 +265,25 @@ const CV = () => {
         </h3>
         <div className="space-y-6">
           <div>
+            <h4 className="text-lg font-medium mb-2">Papers</h4>
+            <ul className="text-zinc-300 space-y-2">
+              <li>
+                • Sayed Ali, M., Novik, A., Boddupally, A.,{' '}
+                <span className="text-white">Yavorskyi, A.</span>, et al.{' '}
+                <a
+                  href="https://arxiv.org/abs/2607.06906"
+                  className="underline hover:text-white transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  The Harness Effect: How Orchestration Design Sets the Token
+                  Economics of Enterprise Agentic AI
+                </a>
+                . arXiv:2607.06906, July 2026.
+              </li>
+            </ul>
+          </div>
+          <div>
             <h4 className="text-lg font-medium mb-2">Conference Talks</h4>
             <ul className="text-zinc-300 space-y-2">
               <li>• AI for Developers: Assistant or Potential Threat?</li>

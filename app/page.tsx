@@ -1,4 +1,5 @@
 import { BlogPosts } from '@/app/components/posts';
+import { Papers } from '@/app/components/papers';
 import { SocialLinks } from './components/social-links';
 import { ExternalLink } from './components/link';
 import Link from 'next/link';
@@ -37,6 +38,10 @@ export default function Page() {
         </Link>{' '}
         and to reach me via any of the links below.
       </p>
+      <div className="mt-8">
+        <h3 className="mb-4 text-foreground/70 text-lg">Research</h3>
+        <Papers />
+      </div>
       <div className="mt-8">
         <h3 className="mb-4 text-foreground/70 text-lg">Read</h3>
         <BlogPosts />
