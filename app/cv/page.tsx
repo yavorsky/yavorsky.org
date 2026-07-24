@@ -220,20 +220,26 @@ const CV = () => {
             </ul>
           </div>
           <div>
-            <h4 className="text-lg font-medium mb-2">
-              unbuilt.app (Creator & Maintainer)
-            </h4>
+            <h4 className="text-lg font-medium mb-2">simr (Creator)</h4>
             <ul className="text-zinc-300 space-y-2">
               <li>
-                • Developed web application analysis tool detecting frameworks,
-                bundlers, and libraries
+                • Built a recipe app that turns any recipe into structured,
+                timed phases — no blog stories, no filler
               </li>
               <li>
-                • Built with Next.js (App Router), Server Actions, Playwright
+                • Designed smart sequencing so steps run in parallel, saving
+                cooks time on every meal
               </li>
               <li>
-                • Implemented custom queue manager on DigitalOcean for efficient
-                resource utilization
+                • Live at{' '}
+                <a
+                  href="https://simr.app"
+                  className="underline hover:text-white transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  simr.app
+                </a>
               </li>
             </ul>
           </div>
@@ -286,6 +292,19 @@ const CV = () => {
           <div>
             <h4 className="text-lg font-medium mb-2">Conference Talks</h4>
             <ul className="text-zinc-300 space-y-2">
+              <li>
+                •{' '}
+                <a
+                  href="https://www.youtube.com/watch?v=XBzDgGKE7Bo"
+                  className="underline hover:text-white transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Engineering in the Age of Uncertainty: Building Systems
+                  Without Determinism
+                </a>{' '}
+                — WAWTech 2025
+              </li>
               <li>• AI for Developers: Assistant or Potential Threat?</li>
               <li>• 99 Ways to Take Away Your Polyfills</li>
               <li>• How We Created Browser Inside Browser</li>

@@ -9,7 +9,7 @@ export const ExternalLink = ({
 }) => {
   return (
     <a
-      className="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 underline"
+      className="underline underline-offset-2 decoration-muted-foreground/40 transition-colors duration-150 hover:text-amber-400 hover:decoration-amber-400/40"
       target="_blank"
       rel="noopener noreferrer"
       href={href}

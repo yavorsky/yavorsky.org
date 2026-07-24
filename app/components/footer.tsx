@@ -2,8 +2,8 @@ import cx from 'classnames';
 
 export default function Footer({ className }: { className?: string }) {
   return (
-    <footer className={cx('pb-4 mt-4', className)}>
-      <p className="text-neutral-600 dark:text-neutral-500">
+    <footer className={cx('pb-6 mt-20', className)}>
+      <p className="font-mono text-xs text-muted-foreground/70">
         © {new Date().getFullYear()} MIT Licensed
       </p>
     </footer>

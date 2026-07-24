@@ -22,6 +22,12 @@ const NavBreadcrumb = ({ className }: BreadcrumbProps) => {
       path: segment,
     }));
 
+  // On the home page the name is the page's own h1, so there is nothing to
+  // navigate back to and nothing to repeat here.
+  if (segments.length === 0) {
+    return null;
+  }
+
   return (
     <nav
       className={cx(

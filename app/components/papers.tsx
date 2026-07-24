@@ -29,23 +29,23 @@ export function Papers() {
         .map((paper) => (
           <a
             key={paper.href}
-            className="flex flex-col space-y-1 mb-4 group"
+            className="group flex flex-col mb-3"
             target="_blank"
             rel="noopener noreferrer"
             href={paper.href}
           >
-            <div className="w-full flex flex-col md:flex-row space-x-0 md:space-x-2">
-              <p className="text-neutral-600 dark:text-neutral-400 md:w-20 shrink-0 tabular-nums whitespace-nowrap">
+            <div className="w-full flex flex-col md:flex-row md:items-baseline md:gap-4">
+              <p className="font-mono text-xs uppercase text-muted-foreground md:w-20 shrink-0 tabular-nums whitespace-nowrap">
                 {formatDate(paper.publishedAt, false, {
                   year: 'numeric',
                   month: 'short',
                 })}
               </p>
               <div>
-                <p className="text-neutral-900 dark:text-neutral-100 tracking-tight group-hover:underline">
+                <p className="tracking-tight text-pretty transition-colors duration-150 group-hover:text-amber-400">
                   {paper.title}
                 </p>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                <p className="mt-1 font-mono text-xs text-muted-foreground/70">
                   {paper.venue}
                 </p>
               </div>

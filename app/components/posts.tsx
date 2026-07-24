@@ -18,17 +18,17 @@ export async function BlogPosts() {
         .map((post) => (
           <Link
             key={post.slug}
-            className="flex flex-col space-y-1 mb-4"
+            className="group flex flex-col mb-3"
             href={`/posts/${post.slug}`}
           >
-            <div className="w-full flex flex-col md:flex-row space-x-0 md:space-x-2">
-              <p className="text-neutral-600 dark:text-neutral-400 md:w-20 shrink-0 tabular-nums whitespace-nowrap">
+            <div className="w-full flex flex-col md:flex-row md:items-baseline md:gap-4">
+              <p className="font-mono text-xs uppercase text-muted-foreground md:w-20 shrink-0 tabular-nums whitespace-nowrap">
                 {formatDate(post.metadata.publishedAt, false, {
                   year: 'numeric',
                   month: 'short',
                 })}
               </p>
-              <p className="text-neutral-900 dark:text-neutral-100 tracking-tight">
+              <p className="tracking-tight text-pretty transition-colors duration-150 group-hover:text-amber-400">
                 {post.metadata.title}
               </p>
             </div>
