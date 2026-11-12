@@ -240,6 +240,7 @@ body:has(.room) footer {
   }
   .room-key {
     margin-top: 10px;
+    text-align: center;
   }
   /* All six sections on one line, spread across the width of the plate. */
   .room-nav {
