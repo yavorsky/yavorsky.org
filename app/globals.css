@@ -239,11 +239,16 @@ body:has(.room) footer {
   .room-key {
     margin-top: 10px;
   }
+  /* All six sections on one line, spread across the width of the plate. */
   .room-nav {
     margin-top: 26px;
     display: flex;
-    flex-wrap: wrap;
-    gap: 2px 18px;
+    justify-content: space-between;
+    gap: 0;
+  }
+  .room-nav a {
+    font-size: clamp(14px, 4.1vw, 18px);
+    white-space: nowrap;
   }
   .room-panel {
     margin-top: 18px;
