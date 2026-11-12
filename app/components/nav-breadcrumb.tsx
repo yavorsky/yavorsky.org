@@ -39,7 +39,7 @@ const NavBreadcrumb = ({ className }: BreadcrumbProps) => {
         href="/"
         className={`transition-colors text-xl font-bold ${segments.length > 0 ? 'hover:underline' : ''}`}
       >
-        Art Yavorsky
+        Artem Yavorsky
       </Link>
 
       {segments.map((segment, index) => (

@@ -13,15 +13,15 @@ import NavBreadcrumb from './components/nav-breadcrumb';
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'Art Yavorsky',
-    template: '%s | Art Yavorsky',
+    default: 'Artem Yavorsky',
+    template: '%s | Artem Yavorsky',
   },
-  description: 'Art Yavorsky - Software Engineer & Engineering Manager.',
+  description: 'Artem Yavorsky - Software Engineer & Engineering Manager.',
   openGraph: {
-    title: 'Art Yavorsky',
-    description: 'Art Yavorsky - Software Engineer & Engineering Manager.',
+    title: 'Artem Yavorsky',
+    description: 'Artem Yavorsky - Software Engineer & Engineering Manager.',
     url: baseUrl,
-    siteName: 'Art Yavorsky',
+    siteName: 'Artem Yavorsky',
     locale: 'en_US',
     type: 'website',
   },

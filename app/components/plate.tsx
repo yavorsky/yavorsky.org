@@ -42,11 +42,13 @@ const DOSES: Dose[] = [
     taken: 0,
     band: 0.42,
   },
+  // A mild, steady lift: the figure holds and never quite stops moving.
   {
-    what: 'Haloperidol',
-    formula: 'C21H23ClFNO2',
+    what: 'Caffeine',
+    formula: 'C8H10N4O2',
     mode: [3, 4, -1],
-    shut: true,
+    rest: 0.0009,
+    band: 0.04,
   },
   {
     what: 'Amphetamine',
@@ -297,7 +299,7 @@ export function Plate({ about, rooms }: { about: ReactNode; rooms: Room[] }) {
   return (
     <div className="room" ref={root}>
       <header className="room-who">
-        <h1>Art Yavorsky</h1>
+        <h1>Artem Yavorsky</h1>
         <p>Developer tools and the teams behind them</p>
       </header>
 
