@@ -26,7 +26,8 @@ type Dose = {
 };
 
 const DOSES: Dose[] = [
-  { what: 'Dopamine', formula: 'C8H11NO2', mode: [1, 2, 1] },
+  // Nothing is added here: a sugar pill, and the sand behaves as it does unprompted.
+  { what: 'Placebo', formula: 'C12H22O11', mode: [1, 2, 1] },
   { what: 'Nicotine', formula: 'C10H14N2', mode: [2, 3, -1], burst: true },
   {
     what: 'Methylphenidate',
