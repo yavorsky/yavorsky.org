@@ -233,8 +233,10 @@ body:has(.room) footer {
     aspect-ratio: 1;
     margin-top: 18px;
   }
+  /* The label keeps its side: name on the left, substance on the right. */
   .room-plaque {
     margin-top: 22px;
+    text-align: right;
   }
   .room-key {
     margin-top: 10px;
