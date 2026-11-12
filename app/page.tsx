@@ -1,10 +1,7 @@
 import Link from 'next/link';
-import { Field } from '@/app/components/field';
-import { SectionLabel } from '@/app/components/section-label';
-import { SocialLinks } from './components/social-links';
-import { ExternalLink } from './components/link';
+import { Plate } from '@/app/components/plate';
 import { formatDate, getBlogPosts } from '@/app/posts/utils';
-import { catalogue, works, type Work } from '@/app/works';
+import { sections, works, type Work } from '@/app/works';
 
 export default async function Page() {
   const posts = await getBlogPosts();
@@ -13,55 +10,82 @@ export default async function Page() {
     .map((post) => ({
       section: 'Read',
       title: post.metadata.title,
-      meta: formatDate(post.metadata.publishedAt, false, {
+      note: formatDate(post.metadata.publishedAt, false, {
         year: 'numeric',
         month: 'short',
       }),
       href: `/posts/${post.slug}`,
     }));
-  const entries = catalogue([...works, ...read]);
+  const all = [...works, ...read];
+  const rooms = sections.map((name) => ({
+    name,
+    works: all.filter((work) => work.section === name),
+  }));
 
   return (
-    <div className="mt-16 w-[min(56rem,calc(100vw-2rem))]">
-      <Field entries={entries}>
-        <h1 className="text-4xl font-semibold tracking-tight text-balance">
-          Art Yavorsky
-        </h1>
-        <p className="mt-3 text-lg text-muted-foreground text-pretty">
-          Software Engineer & Engineering Manager
-        </p>
-        <p className="mt-10 text-pretty">
-          I create developer tools that make the impossible feel routine and
-          routine feel fun.
-        </p>
-        <p className="mt-4 text-pretty">
-          Led engineering teams at{' '}
-          <ExternalLink href="https://wix.com">Wix</ExternalLink> (2018-2023)
-          and <ExternalLink href="https://netflix.com">Netflix</ExternalLink>{' '}
-          (2023-2025). Now at{' '}
-          <ExternalLink href="https://writer.com">Writer.com</ExternalLink>,
-          working on an end-to-end AI platform for IT and business teams.
-        </p>
-        <p className="mt-4 text-pretty">
-          The{' '}
-          <Link
-            className="underline underline-offset-2 decoration-muted-foreground/40 transition-colors duration-150 hover:text-amber-400"
-            href="/cv"
-          >
-            cv
-          </Link>{' '}
-          has the rest.
-        </p>
-      </Field>
-
-      <div id="connect" className="grid md:grid-cols-[7rem_1fr] gap-x-4 scroll-mt-8">
-        <div className="py-3 md:border-t md:border-border">
-          <SectionLabel>Connect</SectionLabel>
-        </div>
-        <div className="border-t border-border">
-          <SocialLinks />
-        </div>
-      </div>
-    </div>
+    <Plate
+      rooms={rooms}
+      about={
+        <>
+          <p>
+            I build developer tools that make the impossible feel routine and
+            the routine feel fun.
+          </p>
+          <p>
+            Led engineering teams at{' '}
+            <a href="https://wix.com" target="_blank" rel="noopener noreferrer">
+              Wix
+            </a>{' '}
+            and{' '}
+            <a
+              href="https://netflix.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Netflix
+            </a>
+            . Now at{' '}
+            <a
+              href="https://writer.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Writer
+            </a>
+            .
+          </p>
+          <p>
+            Open source on the <a href="#build">Babel</a> team. Made{' '}
+            <a href="#build">unbuilt.app</a> and <a href="#build">simr</a>.{' '}
+            <a href="#read">Speak at conferences</a>.
+          </p>
+          <p className="room-links">
+            <Link href="/cv">CV</Link>
+            <a
+              href="https://github.com/yavorsky"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>
+            <a
+              href="https://linkedin.com/in/yvrsky"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              LinkedIn
+            </a>
+            <a
+              href="https://instagram.com/aqson"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Instagram
+            </a>
+            <a href="mailto:aqson@me.com">Email</a>
+          </p>
+        </>
+      }
+    />
   );
 }

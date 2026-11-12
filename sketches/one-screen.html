@@ -5,19 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>yavorsky.org sketches</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
   :root { --room: #000; --sand: #e9dfc7; --text: #f2efe8; --dim: #8d8a83; --faint: #4a4844; }
   * { box-sizing: border-box; margin: 0; }
   html, body { height: 100%; }
-  body { background: var(--room); color: var(--text); font: 400 15px/1.45 'Instrument Sans', system-ui, sans-serif; overflow: hidden; -webkit-font-smoothing: antialiased; }
+  body { background: var(--room); color: var(--text); font: 400 15px/1.45 'Geist', system-ui, sans-serif; overflow: hidden; -webkit-font-smoothing: antialiased; }
   canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; display: block; }
   a { color: inherit; text-decoration: none; }
   .who { position: fixed; left: 40px; top: 34px; }
-  .who h1 { font: 400 44px/1 'Instrument Serif', serif; letter-spacing: -0.01em; }
-  .who p { margin-top: 8px; color: var(--dim); }
+  .who h1 { font: 500 20px/1.2 'Geist', system-ui, sans-serif; letter-spacing: -0.015em; }
+  .who p { margin-top: 3px; color: var(--dim); }
   nav { position: fixed; left: 40px; bottom: 36px; display: grid; gap: 2px; }
-  nav button { all: unset; cursor: pointer; font: 400 26px/1.2 'Instrument Serif', serif; color: var(--faint); transition: color .2s ease; }
+  nav button { all: unset; cursor: pointer; font: 400 18px/1.55 'Geist', system-ui, sans-serif; color: #6f6c66; transition: color .2s ease; }
   nav button:hover, nav button:focus-visible { color: var(--dim); }
   nav button[aria-current="true"] { color: var(--text); }
   .panel { position: fixed; right: 40px; bottom: 36px; width: min(340px, 27vw); }
@@ -30,23 +30,29 @@
   .panel span { color: var(--dim); font-size: 13px; display: block; margin-top: 2px; }
   .plaque { position: fixed; right: 40px; top: 40px; width: min(340px, 27vw); color: var(--dim); font-size: 13px; }
   .plaque b { color: var(--text); font-weight: 500; }
+  .plaque { text-align: right; }
+  .formula { font: 400 12px/1 'Geist Mono', ui-monospace, monospace; color: var(--text); letter-spacing: 0.06em; min-height: 12px; white-space: nowrap; }
+  .formula i { font-style: normal; color: var(--dim); }
+  .what { margin-top: 9px; font-size: 15px; color: var(--text); }
+  .key { position: fixed; left: 0; right: 0; text-align: center; color: #6f6c66; font-size: 13px; pointer-events: none; }
   .pick { position: fixed; left: 50%; top: 14px; transform: translateX(-50%); display: flex; gap: 6px; font-size: 12px; color: var(--dim); align-items: center; }
   .pick button { all: unset; cursor: pointer; padding: 3px 9px; border: 1px solid #2a2927; color: var(--dim); }
   .pick button[aria-pressed="true"] { color: #000; background: var(--text); border-color: var(--text); }
   @media (max-width: 760px) {
     body { overflow: auto; }
     canvas { position: absolute; height: 62vh; top: 120px; }
-    .who, nav, .panel, .plaque { position: static; width: auto; padding: 20px; }
+    .key { position: static; padding: 0 20px; text-align: left; }
+    .who, nav, .panel, .plaque { position: static; width: auto; padding: 20px; text-align: left; }
     .who { padding-top: 48px; } nav { margin-top: 62vh; grid-auto-flow: column; justify-content: start; gap: 14px; }
-    nav button { font-size: 20px; }
   }
 </style>
 </head>
 <body>
 <canvas id="stage"></canvas>
 <div class="pick">sketch <button data-p="0">1 Plate</button><button data-p="1">2 Three bodies</button><button data-p="2">3 Pendulum</button></div>
-<header class="who"><h1>Art Yavorsky</h1><p>Software engineer, engineering manager</p></header>
+<header class="who"><h1>Art Yavorsky</h1><p>Developer tools and the teams behind them</p></header>
 <aside class="plaque" id="plaque"></aside>
+<p class="key" id="key">The sand is dopamine.</p>
 <nav id="nav"></nav>
 <section class="panel" id="panel"></section>
 
@@ -54,7 +60,8 @@
 const SECTIONS = [
   { name: 'About', html: `<p>I build developer tools that make the impossible feel routine and the routine feel fun.</p>
     <p>Led engineering teams at <a href="https://wix.com">Wix</a> and <a href="https://netflix.com">Netflix</a>. Now at <a href="https://writer.com">Writer</a>.</p>
-    <p><a href="/cv">CV</a> &nbsp; <a href="https://github.com/yavorsky">GitHub</a> &nbsp; <a href="https://linkedin.com/in/yvrsky">LinkedIn</a> &nbsp; <a href="mailto:aqson@me.com">Email</a></p>` },
+    <p>Open source on the <a href="#build" data-s="2">Babel</a> team. Made <a href="#build" data-s="2">unbuilt.app</a> and <a href="#build" data-s="2">simr</a>. <a href="#read" data-s="3">Speak at conferences</a>.</p>
+    <p><a href="/cv">CV</a> &nbsp; <a href="https://github.com/yavorsky">GitHub</a> &nbsp; <a href="https://linkedin.com/in/yvrsky">LinkedIn</a> &nbsp; <a href="https://instagram.com/aqson">Instagram</a> &nbsp; <a href="mailto:aqson@me.com">Email</a></p>` },
   { name: 'Research', items: [
     ['The Harness Effect', 'How orchestration design sets the token economics of enterprise agentic AI. arXiv, 2026', 'https://arxiv.org/abs/2607.06906'] ] },
   { name: 'Build', items: [
@@ -80,22 +87,49 @@ let W = 0, H = 0, S = 0, CX = 0, CY = 0;
 let section = Number(q.get('s') || 0), piece = Number(q.get('p') || 0);
 const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* 1. Plate: sand on a vibrating square plate gathers where the plate is still. */
+/* 1. Plate: sand on a vibrating square plate gathers where the plate is still.
+   The sand also behaves as dopamine does, and each section changes one thing about that. */
 const MODES = [[1, 2, 1], [2, 3, -1], [1, 4, 1], [3, 4, -1], [2, 5, 1], [3, 6, -1]];
+const MECH = [
+  { name: 'Untouched', what: 'Dopamine', formula: 'C8H11NO2' },
+  { name: 'Firing in bursts', what: 'Nicotine', formula: 'C10H14N2', burst: 1 },
+  { name: 'Reuptake blocked', what: 'Methylphenidate', formula: 'C14H19NO2', taken: 0, band: 0.42 },
+  { name: 'Receptors blocked', what: 'Haloperidol', formula: 'C21H23ClFNO2', shut: 1 },
+  { name: 'Release reversed', what: 'Amphetamine', formula: 'C9H13N', taken: 0, rest: 0.0032, band: 0.12 },
+  { name: 'Supply raised', what: 'Levodopa', formula: 'C9H11NO4', grains: 46000 },
+];
+const FULL = 46000;
 const plate = {
-  n: 30000, x: null, y: null,
-  plaque: () => `<b>Chladni figure ${MODES[section][0]}:${MODES[section][1]}</b><br>Sand on a vibrating plate gathers where the plate stays still. Each section sounds a different note. Ernst Chladni, 1787. Simulated.`,
-  init() {
-    this.x = new Float32Array(this.n); this.y = new Float32Array(this.n);
-    for (let i = 0; i < this.n; i++) { this.x[i] = Math.random(); this.y[i] = Math.random(); }
-    if (still || q.has('warm')) for (let k = 0; k < 400; k++) this.step();
+  x: new Float32Array(FULL), y: new Float32Array(FULL), n: 0, band: 0, clock: 0,
+  m() { return Object.assign({ burst: 0, taken: 1, shut: 0, rest: 0, band: 0, grains: 30000 }, MECH[section]); },
+  plaque() { const m = MECH[section]; return `<div class="formula" id="formula" aria-label="${m.formula}"></div><div class="what">${m.what}</div>`; },
+  // The formula is rebuilt atom by atom: each count runs from the last substance's to this one's.
+  atoms: {}, run: 0,
+  shown() {
+    const to = {}; for (const [, el, c] of MECH[section].formula.matchAll(/([A-Z][a-z]?)(\d*)/g)) to[el] = Number(c || 1);
+    const from = this.atoms, start = performance.now(), el = document.getElementById('formula'), id = ++this.run;
+    const draw = (now) => { if (id !== this.run) return; const p = still ? 1 : Math.min(1, (now - start) / 700), e = 1 - Math.pow(1 - p, 3), at = {};
+      el.innerHTML = ['C', 'H', 'Cl', 'F', 'N', 'O'].map((a) => { const v = Math.round((from[a] || 0) + ((to[a] || 0) - (from[a] || 0)) * e); at[a] = v;
+        return v ? `${a}${v > 1 ? `<i>${v}</i>` : ''}` : ''; }).join('');
+      this.atoms = at; if (p < 1) requestAnimationFrame(draw); };
+    draw(start);
   },
+  add(count) { for (let k = 0; k < count && this.n < FULL; k++) { this.x[this.n] = Math.random(); this.y[this.n++] = Math.random(); } },
+  init() { this.n = 0; this.band = 0; this.clock = 0; this.add(30000); if (still || q.has('warm')) for (let k = 0; k < 900; k++) this.step(); },
   set() {},
   step() {
-    const [m, n, sign] = MODES[section], P = Math.PI, x = this.x, y = this.y;
+    const [mm, nn, sign] = MODES[section], m = this.m(), P = Math.PI, x = this.x, y = this.y, dt = 1 / 60;
+    this.clock += dt; this.band += (m.band - this.band) * 0.012;
+    // Sand is sprinkled on or brushed off a little at a time.
+    if (this.n < m.grains) this.add(Math.min(40, m.grains - this.n));
+    else for (let c = Math.min(40, this.n - m.grains); c > 0; c--) { const i = (Math.random() * this.n) | 0, l = --this.n; x[i] = x[l]; y[i] = y[l]; }
+    // A resting grain is now and then taken up and set down somewhere else; in bursts, three waves and a pause.
+    const wave = this.clock % 3.6, lift = m.taken * (m.burst ? (wave < 1.2 && wave % 0.4 < 0.16 ? 0.2 : 0.002) : 0.022) * dt, band = this.band;
     for (let i = 0; i < this.n; i++) {
-      const a = Math.cos(n * P * x[i]) * Math.cos(m * P * y[i]) + sign * Math.cos(m * P * x[i]) * Math.cos(n * P * y[i]);
-      const r = Math.min(1, Math.abs(a)) * 0.014, t = Math.random() * 6.2832;
+      const a = Math.abs(Math.cos(nn * P * x[i]) * Math.cos(mm * P * y[i]) + sign * Math.cos(mm * P * x[i]) * Math.cos(nn * P * y[i]));
+      const loose = m.shut ? Math.max(0, 1.45 - a) : Math.max(0, a - band);
+      if (!loose && lift && Math.random() < lift) { x[i] = Math.random(); y[i] = Math.random(); continue; }
+      const r = Math.min(1, loose) * 0.014 + m.rest, t = Math.random() * 6.2832;
       let nx = x[i] + Math.cos(t) * r, ny = y[i] + Math.sin(t) * r;
       x[i] = nx < 0 ? -nx : nx > 1 ? 2 - nx : nx; y[i] = ny < 0 ? -ny : ny > 1 ? 2 - ny : ny;
     }
@@ -180,15 +214,17 @@ function size() {
   const r = devicePixelRatio || 1, box = canvas.getBoundingClientRect();
   W = box.width; H = box.height; canvas.width = W * r; canvas.height = H * r; ctx.setTransform(r, 0, 0, r, 0, 0);
   S = Math.min(H * 0.76, W * 0.5, 760); CX = W / 2; CY = H / 2 + 6;
+  const key = document.getElementById('key'); key.style.top = Math.round(CY + S / 2 + 14) + 'px'; key.style.display = piece === 0 ? '' : 'none';
 }
 function show() {
   document.getElementById('nav').innerHTML = SECTIONS.map((s, i) => `<button data-s="${i}" aria-current="${i === section}">${s.name}</button>`).join('');
   const s = SECTIONS[section];
   document.getElementById('panel').innerHTML = s.html || '<ul>' + s.items.map(([t, n, h]) => `<li><a href="${h}"><b>${t}</b><span>${n}</span></a></li>`).join('') + '</ul>';
-  document.getElementById('plaque').innerHTML = PIECES[piece].plaque();
-  document.querySelectorAll('.pick button').forEach((b) => b.setAttribute('aria-pressed', Number(b.dataset.p) === piece));
+  document.getElementById('plaque').innerHTML = PIECES[piece].plaque(); if (PIECES[piece].shown) PIECES[piece].shown();
+  document.querySelectorAll('.pick button[data-p]').forEach((b) => b.setAttribute('aria-pressed', Number(b.dataset.p) === piece));
 }
 document.getElementById('nav').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; section = Number(b.dataset.s); PIECES[piece].set(); show(); });
+document.getElementById('panel').addEventListener('click', (e) => { const a = e.target.closest('a[data-s]'); if (!a) return; e.preventDefault(); section = Number(a.dataset.s); PIECES[piece].set(); show(); });
 document.querySelector('.pick').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; piece = Number(b.dataset.p); size(); PIECES[piece].init(); show(); });
 canvas.addEventListener('pointermove', (e) => PIECES[piece].touch(e.clientX, e.clientY, false));
 canvas.addEventListener('pointerdown', (e) => PIECES[piece].touch(e.clientX, e.clientY, true));

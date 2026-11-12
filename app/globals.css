@@ -67,36 +67,185 @@
   }
 }
 
-/* The fold control under the homepage message: a hairline and a square. */
-input.fold {
-  appearance: none;
-  -webkit-appearance: none;
-  height: 17px;
-  background: linear-gradient(hsl(var(--border)), hsl(var(--border))) center /
-    100% 1px no-repeat;
-  cursor: ew-resize;
-  outline: none;
+/* The homepage: one room, one plate of sand, and text in the four corners. */
+body:has(.room) {
+  background: #000;
 }
-input.fold::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 7px;
-  height: 17px;
-  border-radius: 0;
-  border: 0;
-  background: hsl(var(--foreground));
+body:has(.room) footer {
+  display: none;
 }
-input.fold::-moz-range-thumb {
-  width: 7px;
-  height: 17px;
-  border-radius: 0;
-  border: 0;
-  background: hsl(var(--foreground));
+.room {
+  --text: #f2efe8;
+  --dim: #8d8a83;
+  --quiet: #6f6c66;
+  --side: 300px;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.45;
 }
-input.fold:hover::-webkit-slider-thumb,
-input.fold:focus-visible::-webkit-slider-thumb {
-  background: #fbbf24;
+.room a {
+  color: inherit;
+  text-decoration: none;
 }
-input.fold:hover::-moz-range-thumb,
-input.fold:focus-visible::-moz-range-thumb {
-  background: #fbbf24;
+.room a:focus-visible {
+  outline: 1px solid var(--dim);
+  outline-offset: 3px;
+}
+.room-plate {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  touch-action: pan-y;
+}
+.room-who {
+  position: fixed;
+  left: 40px;
+  top: 34px;
+}
+.room-who h1 {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+.room-who p {
+  margin-top: 3px;
+  color: var(--dim);
+}
+.room-plaque {
+  position: fixed;
+  right: 40px;
+  top: 40px;
+  text-align: right;
+}
+.room-formula {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  min-height: 12px;
+  white-space: nowrap;
+}
+.room-formula i {
+  font-style: normal;
+  color: var(--dim);
+}
+.room-what {
+  margin-top: 9px;
+}
+.room-key {
+  position: fixed;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: var(--quiet);
+  font-size: 13px;
+  pointer-events: none;
+}
+.room-nav {
+  position: fixed;
+  left: 40px;
+  bottom: 36px;
+  display: grid;
+  gap: 2px;
+}
+.room-nav a {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--quiet);
+  transition: color 0.2s ease;
+}
+.room-nav a:hover {
+  color: var(--dim);
+}
+.room-nav a[aria-current='true'] {
+  color: var(--text);
+}
+.room-panel {
+  position: fixed;
+  right: 40px;
+  bottom: 36px;
+  width: min(340px, var(--side));
+}
+.room-panel p + p {
+  margin-top: 10px;
+}
+.room-panel p a {
+  border-bottom: 1px solid #4a4844;
+  transition: border-color 0.15s ease;
+}
+.room-panel p a:hover {
+  border-color: var(--text);
+}
+.room-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+}
+.room-panel li {
+  padding: 9px 0;
+  border-top: 1px solid #1d1c1a;
+}
+.room-panel li a {
+  display: block;
+}
+.room-panel b {
+  font-weight: 500;
+  display: block;
+  transition: color 0.15s ease;
+}
+.room-panel li a:hover b {
+  color: #e9dfc7;
+}
+.room-panel span {
+  color: var(--dim);
+  font-size: 13px;
+  display: block;
+  margin-top: 2px;
+}
+@media (min-width: 901px) {
+  html:has(.room),
+  body:has(.room) {
+    overflow: hidden;
+  }
+}
+/* On a phone the room becomes a page: the same parts, one under another. */
+@media (max-width: 900px) {
+  .room {
+    width: calc(100vw - 2rem);
+    padding: 28px 0 40px;
+  }
+  .room-who,
+  .room-plaque,
+  .room-key,
+  .room-nav,
+  .room-panel {
+    position: static;
+    width: auto;
+    text-align: left;
+  }
+  .room-plate {
+    position: static;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    margin-top: 18px;
+  }
+  .room-plaque {
+    margin-top: 22px;
+  }
+  .room-key {
+    margin-top: 10px;
+  }
+  .room-nav {
+    margin-top: 26px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 18px;
+  }
+  .room-panel {
+    margin-top: 18px;
+  }
 }
