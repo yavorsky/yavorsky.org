@@ -50,9 +50,10 @@ const DOSES: Dose[] = [
     rest: 0.0009,
     band: 0.04,
   },
+  // MDMA under its official name: sand is pushed out and never settles.
   {
-    what: 'Amphetamine',
-    formula: 'C9H13N',
+    what: 'Midomafetamine',
+    formula: 'C11H15NO2',
     mode: [2, 5, 1],
     taken: 0,
     rest: 0.0032,
