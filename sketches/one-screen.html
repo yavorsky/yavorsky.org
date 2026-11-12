@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>yavorsky.org sketches</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --room: #000; --sand: #e9dfc7; --text: #f2efe8; --dim: #8d8a83; --faint: #4a4844; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { height: 100%; }
+  body { background: var(--room); color: var(--text); font: 400 15px/1.45 'Instrument Sans', system-ui, sans-serif; overflow: hidden; -webkit-font-smoothing: antialiased; }
+  canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; display: block; }
+  a { color: inherit; text-decoration: none; }
+  .who { position: fixed; left: 40px; top: 34px; }
+  .who h1 { font: 400 44px/1 'Instrument Serif', serif; letter-spacing: -0.01em; }
+  .who p { margin-top: 8px; color: var(--dim); }
+  nav { position: fixed; left: 40px; bottom: 36px; display: grid; gap: 2px; }
+  nav button { all: unset; cursor: pointer; font: 400 26px/1.2 'Instrument Serif', serif; color: var(--faint); transition: color .2s ease; }
+  nav button:hover, nav button:focus-visible { color: var(--dim); }
+  nav button[aria-current="true"] { color: var(--text); }
+  .panel { position: fixed; right: 40px; bottom: 36px; width: min(340px, 27vw); }
+  .panel p + p { margin-top: 10px; }
+  .panel p a { border-bottom: 1px solid var(--faint); }
+  .panel li { list-style: none; padding: 9px 0; border-top: 1px solid #1d1c1a; }
+  .panel li a { display: block; }
+  .panel li a:hover b { color: var(--sand); }
+  .panel b { font-weight: 500; display: block; transition: color .15s ease; }
+  .panel span { color: var(--dim); font-size: 13px; display: block; margin-top: 2px; }
+  .plaque { position: fixed; right: 40px; top: 40px; width: min(340px, 27vw); color: var(--dim); font-size: 13px; }
+  .plaque b { color: var(--text); font-weight: 500; }
+  .pick { position: fixed; left: 50%; top: 14px; transform: translateX(-50%); display: flex; gap: 6px; font-size: 12px; color: var(--dim); align-items: center; }
+  .pick button { all: unset; cursor: pointer; padding: 3px 9px; border: 1px solid #2a2927; color: var(--dim); }
+  .pick button[aria-pressed="true"] { color: #000; background: var(--text); border-color: var(--text); }
+  @media (max-width: 760px) {
+    body { overflow: auto; }
+    canvas { position: absolute; height: 62vh; top: 120px; }
+    .who, nav, .panel, .plaque { position: static; width: auto; padding: 20px; }
+    .who { padding-top: 48px; } nav { margin-top: 62vh; grid-auto-flow: column; justify-content: start; gap: 14px; }
+    nav button { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+<canvas id="stage"></canvas>
+<div class="pick">sketch <button data-p="0">1 Plate</button><button data-p="1">2 Three bodies</button><button data-p="2">3 Pendulum</button></div>
+<header class="who"><h1>Art Yavorsky</h1><p>Software engineer, engineering manager</p></header>
+<aside class="plaque" id="plaque"></aside>
+<nav id="nav"></nav>
+<section class="panel" id="panel"></section>
+
+<script>
+const SECTIONS = [
+  { name: 'About', html: `<p>I build developer tools that make the impossible feel routine and the routine feel fun.</p>
+    <p>Led engineering teams at <a href="https://wix.com">Wix</a> and <a href="https://netflix.com">Netflix</a>. Now at <a href="https://writer.com">Writer</a>.</p>
+    <p><a href="/cv">CV</a> &nbsp; <a href="https://github.com/yavorsky">GitHub</a> &nbsp; <a href="https://linkedin.com/in/yvrsky">LinkedIn</a> &nbsp; <a href="mailto:aqson@me.com">Email</a></p>` },
+  { name: 'Research', items: [
+    ['The Harness Effect', 'How orchestration design sets the token economics of enterprise agentic AI. arXiv, 2026', 'https://arxiv.org/abs/2607.06906'] ] },
+  { name: 'Build', items: [
+    ['unbuilt.app', 'Reads a live website and names the stack it was built with', 'https://unbuilt.app'],
+    ['simr', 'Recipes without the life stories', 'https://simr.app'],
+    ['Babel', 'The JavaScript compiler. Team member', 'https://babeljs.io'] ] },
+  { name: 'Read', items: [
+    ['Engineering in the Age of Uncertainty', 'Talk, WAWTech 2025', 'https://www.youtube.com/watch?v=XBzDgGKE7Bo'],
+    ['AI for Developers', 'Talk, fest.dev 2023', '/posts/ai-for-developers'],
+    ['How We Use Code Sharing', 'Float, 2021', '/posts/code-sharing-in-float'] ] },
+  { name: 'Play', items: [
+    ['Blackout', 'A browser game for two about the datacenters behind AI', 'https://www.black-out.space'] ] },
+  { name: 'Cook', items: [
+    ['Lyon Onion Soup', 'French', 'https://simr.app/r/bPGWhI0Nfs'],
+    ['Buldak Ramen with IKEA Meatballs', 'Fusion', 'https://simr.app/r/ruOqwMfUlS'],
+    ['Beef Borscht with Smoky Flavor', 'Ukrainian', 'https://simr.app/r/Nn7DeC3mLW'] ] },
+];
+
+const q = new URLSearchParams(location.search);
+const canvas = document.getElementById('stage');
+const ctx = canvas.getContext('2d');
+let W = 0, H = 0, S = 0, CX = 0, CY = 0;
+let section = Number(q.get('s') || 0), piece = Number(q.get('p') || 0);
+const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* 1. Plate: sand on a vibrating square plate gathers where the plate is still. */
+const MODES = [[1, 2, 1], [2, 3, -1], [1, 4, 1], [3, 4, -1], [2, 5, 1], [3, 6, -1]];
+const plate = {
+  n: 30000, x: null, y: null,
+  plaque: () => `<b>Chladni figure ${MODES[section][0]}:${MODES[section][1]}</b><br>Sand on a vibrating plate gathers where the plate stays still. Each section sounds a different note. Ernst Chladni, 1787. Simulated.`,
+  init() {
+    this.x = new Float32Array(this.n); this.y = new Float32Array(this.n);
+    for (let i = 0; i < this.n; i++) { this.x[i] = Math.random(); this.y[i] = Math.random(); }
+    if (still || q.has('warm')) for (let k = 0; k < 400; k++) this.step();
+  },
+  set() {},
+  step() {
+    const [m, n, sign] = MODES[section], P = Math.PI, x = this.x, y = this.y;
+    for (let i = 0; i < this.n; i++) {
+      const a = Math.cos(n * P * x[i]) * Math.cos(m * P * y[i]) + sign * Math.cos(m * P * x[i]) * Math.cos(n * P * y[i]);
+      const r = Math.min(1, Math.abs(a)) * 0.014, t = Math.random() * 6.2832;
+      let nx = x[i] + Math.cos(t) * r, ny = y[i] + Math.sin(t) * r;
+      x[i] = nx < 0 ? -nx : nx > 1 ? 2 - nx : nx; y[i] = ny < 0 ? -ny : ny > 1 ? 2 - ny : ny;
+    }
+  },
+  frame() {
+    this.step();
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#e9dfc7'; ctx.globalAlpha = 0.85;
+    const x0 = CX - S / 2, y0 = CY - S / 2;
+    for (let i = 0; i < this.n; i++) ctx.fillRect(x0 + this.x[i] * S, y0 + this.y[i] * S, 1.25, 1.25);
+    ctx.globalAlpha = 1;
+  },
+  touch(px, py) { // a hand through the sand
+    const u = (px - CX) / S + 0.5, v = (py - CY) / S + 0.5;
+    for (let i = 0; i < this.n; i++) {
+      const dx = this.x[i] - u, dy = this.y[i] - v, d = dx * dx + dy * dy;
+      if (d < 0.004) { this.x[i] += dx * 0.5 + (Math.random() - 0.5) * 0.02; this.y[i] += dy * 0.5 + (Math.random() - 0.5) * 0.02; }
+    }
+  },
+};
+
+/* 2. Three bodies: equal masses on a periodic orbit. Touch one and it is gone. */
+const ORBITS = [['Figure-eight', 0.347111, 0.532728], ['Moth I', 0.46444, 0.39606], ['Moth II', 0.43917, 0.45297]];
+const bodies = {
+  s: null, v: null, trail: [], fade: 1, broken: false,
+  plaque() { const o = ORBITS[section % 3];
+    return `<b>${o[0]}</b><br>Three equal bodies under gravity, on one of the few orbits that repeat. Click a body to disturb it: there is no way back. Solutions by Moore, 1993, and Šuvakov and Dmitrašinović, 2013. Integrated live.`; },
+  init() { this.set(); },
+  set() { const [, p1, p2] = ORBITS[section % 3];
+    this.s = [-1, 0, 1, 0, 0, 0]; this.v = [p1, p2, p1, p2, -2 * p1, -2 * p2]; this.trail = []; this.broken = false; },
+  acc(s) { const a = [0, 0, 0, 0, 0, 0];
+    for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) if (i !== j) {
+      const dx = s[2 * j] - s[2 * i], dy = s[2 * j + 1] - s[2 * i + 1], r3 = Math.pow(dx * dx + dy * dy + 1e-6, 1.5);
+      a[2 * i] += dx / r3; a[2 * i + 1] += dy / r3; }
+    return a; },
+  rk4(h) { const { s, v } = this, add = (a, b, k) => a.map((x, i) => x + b[i] * k);
+    const k1v = this.acc(s), k1s = v, k2v = this.acc(add(s, k1s, h / 2)), k2s = add(v, k1v, h / 2);
+    const k3v = this.acc(add(s, k2s, h / 2)), k3s = add(v, k2v, h / 2), k4v = this.acc(add(s, k3s, h)), k4s = add(v, k3v, h);
+    for (let i = 0; i < 6; i++) { s[i] += h / 6 * (k1s[i] + 2 * k2s[i] + 2 * k3s[i] + k4s[i]); v[i] += h / 6 * (k1v[i] + 2 * k2v[i] + 2 * k3v[i] + k4v[i]); } },
+  frame() {
+    for (let k = 0; k < 10; k++) this.rk4(0.0012);
+    this.trail.push(this.s.slice()); if (this.trail.length > 900) this.trail.shift();
+    if (this.s.some((p) => Math.abs(p) > 3.2)) this.set();
+    const u = S * 0.44; ctx.clearRect(0, 0, W, H); ctx.lineWidth = 1;
+    for (let b = 0; b < 3; b++) {
+      for (let i = 1; i < this.trail.length; i++) {
+        ctx.globalAlpha = 0.55 * (i / this.trail.length) ** 1.6; ctx.strokeStyle = '#e9dfc7';
+        ctx.beginPath(); ctx.moveTo(CX + this.trail[i - 1][2 * b] * u, CY - this.trail[i - 1][2 * b + 1] * u);
+        ctx.lineTo(CX + this.trail[i][2 * b] * u, CY - this.trail[i][2 * b + 1] * u); ctx.stroke();
+      }
+      ctx.globalAlpha = 1; ctx.fillStyle = '#f2efe8';
+      ctx.fillRect(Math.round(CX + this.s[2 * b] * u) - 4, Math.round(CY - this.s[2 * b + 1] * u) - 4, 8, 8);
+    }
+  },
+  touch(px, py, down) { if (!down) return; const u = S * 0.44; let best = 0, bd = 1e9;
+    for (let b = 0; b < 3; b++) { const d = Math.hypot(CX + this.s[2 * b] * u - px, CY - this.s[2 * b + 1] * u - py); if (d < bd) { bd = d; best = b; } }
+    this.v[2 * best] *= 1.18; this.v[2 * best + 1] *= 1.18; this.broken = true; },
+};
+
+/* 3. Pendulum: two pendulums at a musical interval draw one decaying line. */
+const INTERVALS = [['Unison', 1, 1], ['Octave', 1, 2], ['Fifth', 2, 3], ['Fourth', 3, 4], ['Major third', 4, 5], ['Major sixth', 3, 5]];
+const pendulum = {
+  t: 0, last: null,
+  plaque() { const i = INTERVALS[section]; return `<b>${i[0]}, ${i[1]}:${i[2]}</b><br>Two pendulums swinging at a musical interval share one pen. The figure is the interval, drawn. Harmonograph, 1840s. Simulated.`; },
+  init() { this.set(); },
+  set() { this.t = 0; this.last = null; ctx.clearRect(0, 0, W, H); },
+  at(t) { const [, a, b] = INTERVALS[section], d = Math.exp(-t * 0.006), r = S * 0.46;
+    return [CX + Math.sin(a * 1.003 * t + 1.5708) * d * r, CY + Math.sin(b * t) * d * r]; },
+  frame() {
+    if (this.t > 620) return;
+    ctx.strokeStyle = '#e9dfc7'; ctx.globalAlpha = 0.42; ctx.lineWidth = 0.7; ctx.beginPath();
+    const steps = still || q.has('warm') ? 40000 : 70;
+    let p = this.last || this.at(0); ctx.moveTo(p[0], p[1]);
+    for (let k = 0; k < steps && this.t <= 620; k++) { this.t += 0.012; p = this.at(this.t); ctx.lineTo(p[0], p[1]); }
+    ctx.stroke(); ctx.globalAlpha = 1; this.last = p;
+  },
+  touch() {},
+};
+
+const PIECES = [plate, bodies, pendulum];
+function size() {
+  const r = devicePixelRatio || 1, box = canvas.getBoundingClientRect();
+  W = box.width; H = box.height; canvas.width = W * r; canvas.height = H * r; ctx.setTransform(r, 0, 0, r, 0, 0);
+  S = Math.min(H * 0.76, W * 0.5, 760); CX = W / 2; CY = H / 2 + 6;
+}
+function show() {
+  document.getElementById('nav').innerHTML = SECTIONS.map((s, i) => `<button data-s="${i}" aria-current="${i === section}">${s.name}</button>`).join('');
+  const s = SECTIONS[section];
+  document.getElementById('panel').innerHTML = s.html || '<ul>' + s.items.map(([t, n, h]) => `<li><a href="${h}"><b>${t}</b><span>${n}</span></a></li>`).join('') + '</ul>';
+  document.getElementById('plaque').innerHTML = PIECES[piece].plaque();
+  document.querySelectorAll('.pick button').forEach((b) => b.setAttribute('aria-pressed', Number(b.dataset.p) === piece));
+}
+document.getElementById('nav').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; section = Number(b.dataset.s); PIECES[piece].set(); show(); });
+document.querySelector('.pick').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; piece = Number(b.dataset.p); size(); PIECES[piece].init(); show(); });
+canvas.addEventListener('pointermove', (e) => PIECES[piece].touch(e.clientX, e.clientY, false));
+canvas.addEventListener('pointerdown', (e) => PIECES[piece].touch(e.clientX, e.clientY, true));
+addEventListener('resize', () => { size(); PIECES[piece].init(); });
+addEventListener('keydown', (e) => { const d = e.key === 'ArrowDown' ? 1 : e.key === 'ArrowUp' ? -1 : 0; if (!d) return; section = (section + d + SECTIONS.length) % SECTIONS.length; PIECES[piece].set(); show(); });
+size(); PIECES[piece].init(); show();
+(function loop() { PIECES[piece].frame(); requestAnimationFrame(loop); })();
+</script>
+</body>
+</html>

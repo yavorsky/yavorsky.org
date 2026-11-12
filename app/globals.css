@@ -66,3 +66,37 @@
     @apply bg-background text-foreground font-sans;
   }
 }
+
+/* The fold control under the homepage message: a hairline and a square. */
+input.fold {
+  appearance: none;
+  -webkit-appearance: none;
+  height: 17px;
+  background: linear-gradient(hsl(var(--border)), hsl(var(--border))) center /
+    100% 1px no-repeat;
+  cursor: ew-resize;
+  outline: none;
+}
+input.fold::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 7px;
+  height: 17px;
+  border-radius: 0;
+  border: 0;
+  background: hsl(var(--foreground));
+}
+input.fold::-moz-range-thumb {
+  width: 7px;
+  height: 17px;
+  border-radius: 0;
+  border: 0;
+  background: hsl(var(--foreground));
+}
+input.fold:hover::-webkit-slider-thumb,
+input.fold:focus-visible::-webkit-slider-thumb {
+  background: #fbbf24;
+}
+input.fold:hover::-moz-range-thumb,
+input.fold:focus-visible::-moz-range-thumb {
+  background: #fbbf24;
+}
