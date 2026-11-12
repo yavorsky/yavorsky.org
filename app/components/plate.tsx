@@ -28,9 +28,27 @@ type Dose = {
 const DOSES: Dose[] = [
   { what: 'Dopamine', formula: 'C8H11NO2', mode: [1, 2, 1] },
   { what: 'Nicotine', formula: 'C10H14N2', mode: [2, 3, -1], burst: true },
-  { what: 'Methylphenidate', formula: 'C14H19NO2', mode: [1, 4, 1], taken: 0, band: 0.42 },
-  { what: 'Haloperidol', formula: 'C21H23ClFNO2', mode: [3, 4, -1], shut: true },
-  { what: 'Amphetamine', formula: 'C9H13N', mode: [2, 5, 1], taken: 0, rest: 0.0032, band: 0.12 },
+  {
+    what: 'Methylphenidate',
+    formula: 'C14H19NO2',
+    mode: [1, 4, 1],
+    taken: 0,
+    band: 0.42,
+  },
+  {
+    what: 'Haloperidol',
+    formula: 'C21H23ClFNO2',
+    mode: [3, 4, -1],
+    shut: true,
+  },
+  {
+    what: 'Amphetamine',
+    formula: 'C9H13N',
+    mode: [2, 5, 1],
+    taken: 0,
+    rest: 0.0032,
+    band: 0.12,
+  },
   { what: 'Levodopa', formula: 'C9H11NO4', mode: [3, 6, -1], grains: 46000 },
 ];
 
@@ -70,7 +88,8 @@ export function Plate({ about, rooms }: { about: ReactNode; rooms: Room[] }) {
     read();
     window.addEventListener('hashchange', read);
     const step = (event: KeyboardEvent) => {
-      const by = event.key === 'ArrowDown' ? 1 : event.key === 'ArrowUp' ? -1 : 0;
+      const by =
+        event.key === 'ArrowDown' ? 1 : event.key === 'ArrowUp' ? -1 : 0;
       if (!by || event.metaKey || event.ctrlKey || event.altKey) return;
       event.preventDefault();
       const next = (current.current + by + names.length) % names.length;
@@ -207,7 +226,10 @@ export function Plate({ about, rooms }: { about: ReactNode; rooms: Room[] }) {
       CX = W / 2;
       CY = wide ? H / 2 + 6 : H / 2;
       // Room left beside the plate for the text columns, and the line under it.
-      root.current!.style.setProperty('--side', `${Math.floor((W - S) / 2 - 64)}px`);
+      root.current!.style.setProperty(
+        '--side',
+        `${Math.floor((W - S) / 2 - 64)}px`
+      );
       key.current!.style.top = wide ? `${Math.round(CY + S / 2 + 14)}px` : '';
       if (still) draw();
     };
@@ -308,7 +330,11 @@ export function Plate({ about, rooms }: { about: ReactNode; rooms: Room[] }) {
               return (
                 <li key={work.href}>
                   {work.href.startsWith('http') ? (
-                    <a href={work.href} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={work.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       {body}
                     </a>
                   ) : (

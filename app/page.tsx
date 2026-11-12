@@ -6,7 +6,9 @@ import { sections, works, type Work } from '@/app/works';
 export default async function Page() {
   const posts = await getBlogPosts();
   const read: Work[] = posts
-    .sort((a, b) => b.metadata.publishedAt.localeCompare(a.metadata.publishedAt))
+    .sort((a, b) =>
+      b.metadata.publishedAt.localeCompare(a.metadata.publishedAt)
+    )
     .map((post) => ({
       section: 'Read',
       title: post.metadata.title,
