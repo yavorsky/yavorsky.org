@@ -26,8 +26,14 @@ type Dose = {
 };
 
 const DOSES: Dose[] = [
-  // Nothing is added here: a sugar pill, and the sand behaves as it does unprompted.
-  { what: 'Placebo', formula: 'C12H22O11', mode: [1, 2, 1] },
+  // Ego. Cocaine under its chemical name: nothing is cleared away, so the lines swell.
+  {
+    what: 'Benzoylmethylecgonine',
+    formula: 'C17H21NO4',
+    mode: [1, 2, 1],
+    taken: 0,
+    band: 0.3,
+  },
   { what: 'Nicotine', formula: 'C10H14N2', mode: [2, 3, -1], burst: true },
   {
     what: 'Methylphenidate',
