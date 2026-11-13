@@ -2,69 +2,9 @@
 
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { DOSES, makeSand, SAND } from '@/app/components/sand';
 import type { Work } from '@/app/works';
 
-// One plate of sand per section. The sand gathers on the still lines of a
-// vibrating square plate (a Chladni figure), and it also behaves as dopamine
-// does: each section changes one thing about how it arrives, rests or leaves.
-type Dose = {
-  what: string;
-  formula: string;
-  // The plate's mode numbers and sign: which figure the sand settles into.
-  mode: [number, number, number];
-  // 1: resting grains are now and then taken up and set down elsewhere.
-  taken?: number;
-  // The taking-up comes in three waves, then a pause.
-  burst?: boolean;
-  // Sand is turned away from the still lines instead of drawn to them.
-  shut?: boolean;
-  // How far from a still line sand comes to rest.
-  band?: number;
-  // Movement that never dies down.
-  rest?: number;
-  grains?: number;
-};
-
-const DOSES: Dose[] = [
-  // Ego. Cocaine under its chemical name: nothing is cleared away, so the lines swell.
-  {
-    what: 'Benzoylmethylecgonine',
-    formula: 'C17H21NO4',
-    mode: [1, 2, 1],
-    taken: 0,
-    band: 0.3,
-  },
-  { what: 'Nicotine', formula: 'C10H14N2', mode: [2, 3, -1], burst: true },
-  {
-    what: 'Methylphenidate',
-    formula: 'C14H19NO2',
-    mode: [1, 4, 1],
-    taken: 0,
-    band: 0.42,
-  },
-  // A mild, steady lift: the figure holds and never quite stops moving.
-  {
-    what: 'Caffeine',
-    formula: 'C8H10N4O2',
-    mode: [3, 4, -1],
-    rest: 0.0009,
-    band: 0.04,
-  },
-  // MDMA under its official name: sand is pushed out and never settles.
-  {
-    what: 'Midomafetamine',
-    formula: 'C11H15NO2',
-    mode: [2, 5, 1],
-    taken: 0,
-    rest: 0.0032,
-    band: 0.12,
-  },
-  { what: 'Levodopa', formula: 'C9H11NO4', mode: [3, 6, -1], grains: 46000 },
-];
-
-const FULL = 46000;
-const USUAL = 30000;
-const SAND = '#e9dfc7';
 const ATOMS = ['C', 'H', 'Cl', 'F', 'N', 'O'];
 
 function atoms(formula: string) {
@@ -146,70 +86,14 @@ export function Plate({ about, rooms }: { about: ReactNode; rooms: Room[] }) {
     const element = canvas.current!;
     const ctx = element.getContext('2d')!;
     const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const x = new Float32Array(FULL);
-    const y = new Float32Array(FULL);
-    let n = 0;
-    let band = 0;
-    let clock = 0;
+    const sand = makeSand();
+    const { x, y } = sand;
+    const step = () => sand.step(DOSES[current.current]);
     let W = 0;
     let H = 0;
     let S = 0;
     let CX = 0;
     let CY = 0;
-
-    const add = (count: number) => {
-      for (let k = 0; k < count && n < FULL; k++) {
-        x[n] = Math.random();
-        y[n++] = Math.random();
-      }
-    };
-
-    const step = () => {
-      const dose = DOSES[current.current];
-      const [m, nn, sign] = dose.mode;
-      const taken = dose.taken ?? 1;
-      const grains = dose.grains ?? USUAL;
-      const P = Math.PI;
-      const dt = 1 / 60;
-      clock += dt;
-      band += ((dose.band ?? 0) - band) * 0.012;
-      // Sand is sprinkled on or brushed off a little at a time.
-      if (n < grains) add(Math.min(40, grains - n));
-      else {
-        for (let c = Math.min(40, n - grains); c > 0; c--) {
-          const i = (Math.random() * n) | 0;
-          const last = --n;
-          x[i] = x[last];
-          y[i] = y[last];
-        }
-      }
-      const wave = clock % 3.6;
-      const rate = dose.burst
-        ? wave < 1.2 && wave % 0.4 < 0.16
-          ? 0.2
-          : 0.002
-        : 0.022;
-      const lift = taken * rate * dt;
-      const rest = dose.rest ?? 0;
-      for (let i = 0; i < n; i++) {
-        const a = Math.abs(
-          Math.cos(nn * P * x[i]) * Math.cos(m * P * y[i]) +
-            sign * Math.cos(m * P * x[i]) * Math.cos(nn * P * y[i])
-        );
-        const loose = dose.shut ? Math.max(0, 1.45 - a) : Math.max(0, a - band);
-        if (!loose && lift && Math.random() < lift) {
-          x[i] = Math.random();
-          y[i] = Math.random();
-          continue;
-        }
-        const r = Math.min(1, loose) * 0.014 + rest;
-        const t = Math.random() * 6.2832;
-        const nx = x[i] + Math.cos(t) * r;
-        const ny = y[i] + Math.sin(t) * r;
-        x[i] = nx < 0 ? -nx : nx > 1 ? 2 - nx : nx;
-        y[i] = ny < 0 ? -ny : ny > 1 ? 2 - ny : ny;
-      }
-    };
 
     const draw = () => {
       ctx.clearRect(0, 0, W, H);
@@ -217,7 +101,7 @@ export function Plate({ about, rooms }: { about: ReactNode; rooms: Room[] }) {
       ctx.globalAlpha = 0.85;
       const x0 = CX - S / 2;
       const y0 = CY - S / 2;
-      for (let i = 0; i < n; i++) {
+      for (let i = 0, n = sand.n; i < n; i++) {
         ctx.fillRect(x0 + x[i] * S, y0 + y[i] * S, 1.25, 1.25);
       }
       ctx.globalAlpha = 1;
@@ -251,7 +135,6 @@ export function Plate({ about, rooms }: { about: ReactNode; rooms: Room[] }) {
     };
     resettle.current = still ? settle : () => {};
 
-    add(USUAL);
     size();
     if (still) settle();
 
@@ -276,7 +159,7 @@ export function Plate({ about, rooms }: { about: ReactNode; rooms: Room[] }) {
       const box = element.getBoundingClientRect();
       const u = (event.clientX - box.left - CX) / S + 0.5;
       const v = (event.clientY - box.top - CY) / S + 0.5;
-      for (let i = 0; i < n; i++) {
+      for (let i = 0, n = sand.n; i < n; i++) {
         const dx = x[i] - u;
         const dy = y[i] - v;
         if (dx * dx + dy * dy < 0.004) {
@@ -311,7 +194,7 @@ export function Plate({ about, rooms }: { about: ReactNode; rooms: Room[] }) {
 
       <canvas ref={canvas} className="room-plate" aria-hidden="true" />
       <p className="room-key" ref={key}>
-        The sand is dopamine.
+        <Link href="/sand">The sand is dopamine.</Link>
       </p>
 
       <nav className="room-nav" aria-label="Sections">

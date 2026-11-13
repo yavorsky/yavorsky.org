@@ -144,6 +144,17 @@ body:has(.room) footer {
   font-size: 13px;
   pointer-events: none;
 }
+.room-key a {
+  pointer-events: auto;
+  border-bottom: 1px solid #33312e;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+.room-key a:hover {
+  color: var(--text);
+  border-color: var(--dim);
+}
 .room-nav {
   position: fixed;
   left: 40px;
@@ -255,5 +266,130 @@ body:has(.room) footer {
   }
   .room-panel {
     margin-top: 18px;
+  }
+}
+
+/* The note on the plate: a wall label, a wall text, and the six plates. */
+body:has(.wall) {
+  background: #000;
+}
+.wall {
+  --text: #f2efe8;
+  --dim: #8d8a83;
+  --quiet: #6f6c66;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.5;
+  padding: 56px 0 24px;
+}
+.wall a {
+  border-bottom: 1px solid #4a4844;
+  transition: border-color 0.15s ease;
+}
+.wall a:hover {
+  border-color: var(--text);
+}
+.wall-label h1 {
+  font-size: clamp(34px, 6vw, 56px);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+.wall-label p {
+  color: var(--dim);
+}
+.wall-label h1 + p {
+  margin-top: 18px;
+  color: var(--text);
+}
+.wall-text {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  margin-top: 72px;
+  padding-top: 20px;
+  border-top: 1px solid #1d1c1a;
+}
+.wall h2,
+.wall dt,
+.wall-formula,
+.wall-rule {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+.wall h2,
+.wall dt {
+  text-transform: uppercase;
+  color: var(--quiet);
+}
+.wall-text p {
+  margin-top: 12px;
+  max-width: 44ch;
+}
+.wall-text .wall-rule {
+  color: var(--dim);
+  white-space: nowrap;
+}
+.wall-plates {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 56px 32px;
+  margin-top: 72px;
+  padding-top: 32px;
+  border-top: 1px solid #1d1c1a;
+}
+.wall-figure {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  margin-bottom: 18px;
+}
+.wall-formula {
+  display: block;
+  line-height: 1;
+}
+.wall-formula i {
+  font-style: normal;
+  color: var(--dim);
+}
+.wall h3 {
+  margin-top: 9px;
+}
+.wall .wall-section {
+  color: var(--dim);
+  border-bottom-color: transparent;
+}
+.wall dt {
+  margin-top: 14px;
+}
+.wall dd {
+  margin-top: 3px;
+  color: var(--dim);
+}
+.wall-note {
+  margin-top: 72px;
+  padding-top: 20px;
+  border-top: 1px solid #1d1c1a;
+  color: var(--quiet);
+  font-size: 13px;
+  max-width: 60ch;
+}
+@media (max-width: 700px) {
+  .wall {
+    padding-top: 28px;
+  }
+  .wall-text {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-top: 48px;
+  }
+  .wall-plates {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 16px;
+    margin-top: 48px;
+  }
+  .wall-rule {
+    font-size: 11px;
   }
 }
