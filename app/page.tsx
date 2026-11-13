@@ -30,11 +30,20 @@ export default async function Page() {
       about={
         <>
           <p>
-            I build developer tools that make the impossible feel routine and
-            the routine feel fun.
+            I build AI agents and developer tools that make the impossible feel
+            routine and the routine feel fun.
           </p>
           <p>
-            Led engineering teams at{' '}
+            At{' '}
+            <a
+              href="https://writer.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Writer
+            </a>{' '}
+            I lead Action Agent, an autonomous agent that reasons, runs code and
+            works inside company systems. Before that, engineering teams at{' '}
             <a href="https://wix.com" target="_blank" rel="noopener noreferrer">
               Wix
             </a>{' '}
@@ -46,19 +55,12 @@ export default async function Page() {
             >
               Netflix
             </a>
-            . Now at{' '}
-            <a
-              href="https://writer.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Writer
-            </a>
             .
           </p>
           <p>
             Open source on the <a href="#build">Babel</a> team. Made{' '}
             <a href="#build">unbuilt.app</a> and <a href="#build">simr</a>.{' '}
+            <a href="#research">Research</a> on what agents cost to run.{' '}
             <a href="#read">Speak at conferences</a>.
           </p>
           <p className="room-links">

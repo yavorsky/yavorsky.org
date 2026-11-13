@@ -38,6 +38,12 @@ export const works: Work[] = [
   },
   {
     section: 'Read',
+    title: 'Agents That Work While You Don’t',
+    note: 'Workshop: building ambient AI from scratch. WAWTech Live, 2026',
+    href: 'https://www.youtube.com/watch?v=JCwf9Lf1TR4',
+  },
+  {
+    section: 'Read',
     title: 'Engineering in the Age of Uncertainty',
     note: 'Talk, WAWTech 2025',
     href: 'https://www.youtube.com/watch?v=XBzDgGKE7Bo',

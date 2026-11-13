@@ -301,7 +301,7 @@ export function Plate({ about, rooms }: { about: ReactNode; rooms: Room[] }) {
     <div className="room" ref={root}>
       <header className="room-who">
         <h1>Artem Yavorsky</h1>
-        <p>Developer tools and the teams behind them</p>
+        <p>AI agents, developer tools, and the teams behind them</p>
       </header>
 
       <aside className="room-plaque">
