@@ -189,7 +189,6 @@ export function Plate({ about, rooms }: { about: ReactNode; rooms: Room[] }) {
 
       <aside className="room-plaque">
         <div className="room-formula" ref={formula} aria-label={dose.formula} />
-        <div className="room-what">{dose.what}</div>
       </aside>
 
       <canvas ref={canvas} className="room-plate" aria-hidden="true" />

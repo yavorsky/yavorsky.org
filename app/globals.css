@@ -132,9 +132,6 @@ body:has(.room) footer {
   font-style: normal;
   color: var(--dim);
 }
-.room-what {
-  margin-top: 9px;
-}
 .room-key {
   position: fixed;
   left: 0;
